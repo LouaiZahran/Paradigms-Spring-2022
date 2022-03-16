@@ -76,7 +76,7 @@ String decorated_text():
             part=part.replace("style=\"","");
             s=s.replace(";\"",";");
         }
-        decorated=s+part;})|("AND" decorated_text() |"\n" ))
+        decorated=s+part;})|"\n" )
     {
         if(decorated.contains("{TEXT:")){
             int index=decorated.indexOf("{");
@@ -108,7 +108,7 @@ String decorated_url():
                 s=s.replace(";\"",";");
                 System.out.println(part);
             }
-            decorated=s+part;})|("AND" decorated_url() |"\n")){
+            decorated=s+part;})|"\n"){
                 System.out.println(decorated);
                  if(decorated.contains("{TEXT:")){
                      int index=decorated.indexOf("{");
