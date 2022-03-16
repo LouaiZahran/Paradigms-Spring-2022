@@ -7,29 +7,32 @@ public class Parser implements ParserConstants {
         System.out.println(new Parser(System.in).create());
     }
 
-  static final public String create() throws ParseException {String s="";
-    jj_consume_token(7);
+  static final public String create() throws ParseException {String s;
+    jj_consume_token(6);
     s = element();
 {if ("" != null) return s;}
     throw new Error("Missing return statement in function");
 }
 
-  static final public String element() throws ParseException {String s = "";
+  static final public String element() throws ParseException {String s;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case 8:{
+    case 7:{
       s = img();
+{if ("" != null) return s;}
+      break;
+      }
+    case 10:{
+      s = header();
+{if ("" != null) return s;}
       break;
       }
     case 11:{
-      header();
+      s = para();
+{if ("" != null) return s;}
       break;
       }
     case 12:{
-      para();
-      break;
-      }
-    case 13:{
-      url();
+      s = url();
 {if ("" != null) return s;}
       break;
       }
@@ -41,10 +44,10 @@ public class Parser implements ParserConstants {
     throw new Error("Missing return statement in function");
 }
 
-  static final public String img() throws ParseException {String s;
+  static final public String img() throws ParseException {String s="";
+    jj_consume_token(7);
     jj_consume_token(8);
     jj_consume_token(9);
-    jj_consume_token(10);
     jj_consume_token(quote);
     s = sentence();
     jj_consume_token(quote);
@@ -52,22 +55,28 @@ public class Parser implements ParserConstants {
     throw new Error("Missing return statement in function");
 }
 
-  static final public void header() throws ParseException {
+  static final public String header() throws ParseException {String s="";
+    jj_consume_token(10);
+    s = decorated_text();
+{if ("" != null) return "<h1 "+s+"</h1>";}
+    throw new Error("Missing return statement in function");
+}
+
+  static final public String para() throws ParseException {String s="";
     jj_consume_token(11);
-    decorated_text();
+    s = decorated_text();
+{if ("" != null) return "<p "+s+"</p>";}
+    throw new Error("Missing return statement in function");
 }
 
-  static final public void para() throws ParseException {
+  static final public String url() throws ParseException {String s="";
     jj_consume_token(12);
-    decorated_text();
+    s = decorated_url();
+{if ("" != null) return "<a "+s+"</a>";}
+    throw new Error("Missing return statement in function");
 }
 
-  static final public void url() throws ParseException {
-    jj_consume_token(13);
-    decorated_url();
-}
-
-  static final public String sentence() throws ParseException {String s;Token c;
+  static final public String sentence() throws ParseException {String s="";Token c;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case alphanumeric:{
       c = jj_consume_token(alphanumeric);
@@ -82,33 +91,36 @@ public class Parser implements ParserConstants {
     throw new Error("Missing return statement in function");
 }
 
-  static final public void decorated_text() throws ParseException {
-System.out.println("Text");
-    decorated_text_part();
+  static final public String decorated_text() throws ParseException {String s=""; String part=""; String decorated="";
+    s = decorated_text_part();
+decorated = s;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case 13:{
+      jj_consume_token(13);
+      part = decorated_text();
+if(s.contains("style=") && part.contains("style=")){
+            part=part.replace("style=\"","");
+            s=s.replace(";\"",";");
+        }
+        decorated=s+part;
+      break;
+      }
     case 14:{
-      jj_consume_token(14);
-      decorated_text();
-      break;
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case 13:{
+        jj_consume_token(13);
+        decorated_text();
+        break;
+        }
+      case 14:{
+        jj_consume_token(14);
+        break;
+        }
+      default:
+        jj_la1[2] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
       }
-    default:
-      jj_la1[2] = jj_gen;
-      ;
-    }
-}
-
-  static final public void decorated_text_part() throws ParseException {
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case 16:{
-      text();
-      break;
-      }
-    case 17:{
-      color();
-      break;
-      }
-    case 18:{
-      font();
       break;
       }
     default:
@@ -116,55 +128,73 @@ System.out.println("Text");
       jj_consume_token(-1);
       throw new ParseException();
     }
-}
-
-  static final public void decorated_url() throws ParseException {
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case 15:
-    case 16:
-    case 17:
-    case 18:{
-System.out.println("url");
-      decorated_url_part();
-      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-      case 14:{
-        jj_consume_token(14);
-        decorated_url();
-        break;
+if(decorated.contains("{TEXT:")){
+            int index=decorated.indexOf("{");
+            int lastIndex=decorated.indexOf("}");
+            String txt=decorated.substring(index+6,lastIndex);
+            decorated=decorated.replace("{TEXT:"+txt+"}","");
+            decorated=decorated+">"+txt;
         }
-      default:
-        jj_la1[4] = jj_gen;
-        ;
-      }
-      break;
-      }
-    case 7:{
-      create();
-      break;
-      }
-    default:
-      jj_la1[5] = jj_gen;
-      jj_consume_token(-1);
-      throw new ParseException();
-    }
+    {if ("" != null) return decorated;}
+    throw new Error("Missing return statement in function");
 }
 
-  static final public void decorated_url_part() throws ParseException {
+  static final public String decorated_text_part() throws ParseException {String s="";
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case 16:{
-      text();
+      s = text();
+{if ("" != null) return s;}
       break;
       }
     case 17:{
-      color();
+      s = color();
+{if ("" != null) return s;}
       break;
       }
     case 18:{
-      font();
+      s = font();
+{if ("" != null) return s;}
       break;
       }
-    case 15:{
-      link();
+    default:
+      jj_la1[4] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+}
+
+  static final public String decorated_url() throws ParseException {String s=""; String part=""; String decorated="";
+    s = decorated_url_part();
+decorated = s;
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case 13:{
+      jj_consume_token(13);
+      part = decorated_url();
+if(s.contains("style=") && part.contains("style=")){
+                part=part.replace("style=\"","");
+                s=s.replace(";\"",";");
+                System.out.println(part);
+            }
+            decorated=s+part;
+      break;
+      }
+    case 14:{
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case 13:{
+        jj_consume_token(13);
+        decorated_url();
+        break;
+        }
+      case 14:{
+        jj_consume_token(14);
+        break;
+        }
+      default:
+        jj_la1[5] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
       break;
       }
     default:
@@ -172,35 +202,82 @@ System.out.println("url");
       jj_consume_token(-1);
       throw new ParseException();
     }
+System.out.println(decorated);
+                 if(decorated.contains("{TEXT:")){
+                     int index=decorated.indexOf("{");
+                     int lastIndex=decorated.indexOf("}");
+                     String txt=decorated.substring(index+6,lastIndex);
+                     decorated=decorated.replace("{TEXT:"+txt+"}","");
+                     decorated=decorated+">"+txt;
+                 }
+         {if ("" != null) return decorated;}
+    throw new Error("Missing return statement in function");
 }
 
-  static final public void link() throws ParseException {
+  static final public String decorated_url_part() throws ParseException {String s="";
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case 16:{
+      s = text();
+{if ("" != null) return s;}
+      break;
+      }
+    case 17:{
+      s = color();
+{if ("" != null) return s;}
+      break;
+      }
+    case 18:{
+      s = font();
+{if ("" != null) return s;}
+      break;
+      }
+    case 15:{
+      s = link();
+{if ("" != null) return s;}
+      break;
+      }
+    default:
+      jj_la1[7] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+}
+
+  static final public String link() throws ParseException {String s="";
     jj_consume_token(15);
     jj_consume_token(quote);
-    sentence();
+    s = sentence();
     jj_consume_token(quote);
+{if ("" != null) return "href=\""+ s +"\"";}
+    throw new Error("Missing return statement in function");
 }
 
-  static final public void text() throws ParseException {String s;
+  static final public String text() throws ParseException {String s="";
     jj_consume_token(16);
     jj_consume_token(quote);
     s = sentence();
     jj_consume_token(quote);
-System.out.println(s);
+{if ("" != null) return "{TEXT:"+ s +"}";}
+    throw new Error("Missing return statement in function");
 }
 
-  static final public void color() throws ParseException {
+  static final public String color() throws ParseException {String s="";
     jj_consume_token(17);
     jj_consume_token(quote);
-    sentence();
+    s = sentence();
     jj_consume_token(quote);
+{if ("" != null) return "style=\"color:"+ s +";\"";}
+    throw new Error("Missing return statement in function");
 }
 
-  static final public void font() throws ParseException {
+  static final public String font() throws ParseException {String s="";
     jj_consume_token(18);
     jj_consume_token(quote);
-    sentence();
+    s = sentence();
     jj_consume_token(quote);
+{if ("" != null) return "style=\"font-family:"+ s +";\"";}
+    throw new Error("Missing return statement in function");
 }
 
   static private boolean jj_initialized_once = false;
@@ -213,13 +290,13 @@ System.out.println(s);
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[7];
+  static final private int[] jj_la1 = new int[8];
   static private int[] jj_la1_0;
   static {
 	   jj_la1_init_0();
 	}
 	private static void jj_la1_init_0() {
-	   jj_la1_0 = new int[] {0x3900,0x40,0x4000,0x70000,0x4000,0x78080,0x78000,};
+	   jj_la1_0 = new int[] {0x1c80,0x20,0x6000,0x6000,0x70000,0x6000,0x6000,0x78000,};
 	}
 
   /** Constructor with InputStream. */
@@ -240,7 +317,7 @@ System.out.println(s);
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -254,7 +331,7 @@ System.out.println(s);
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -271,7 +348,7 @@ System.out.println(s);
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -289,7 +366,7 @@ System.out.println(s);
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -305,7 +382,7 @@ System.out.println(s);
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -314,7 +391,7 @@ System.out.println(s);
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -370,7 +447,7 @@ System.out.println(s);
 	   la1tokens[jj_kind] = true;
 	   jj_kind = -1;
 	 }
-	 for (int i = 0; i < 7; i++) {
+	 for (int i = 0; i < 8; i++) {
 	   if (jj_la1[i] == jj_gen) {
 		 for (int j = 0; j < 32; j++) {
 		   if ((jj_la1_0[i] & (1<<j)) != 0) {

@@ -6,111 +6,158 @@ public class Parser {
     public static void main(String[] args) throws Exception {
         System.out.println(new Parser(System.in).create());
     }
+
 }
 
 PARSER_END(Parser)
 
-SKIP:  { " " | "\t" | "\n" | "\r"}
+SKIP:  { " " | "\t" | "\r"}
 TOKEN: {<quote : "\"">}
 TOKEN: {<alphanumeric : ["0"-"9"] | ["a"-"z"] | ["A"-"Z"] | "/" | ":" | "." | "+" | "%" | "&" | "_" >}
 
 String create():
-{String s="";}
+{String s;}
 {
     "ADD" s=element()
     {return s;}
 }
 
 String element():
-{String s = "";}
+{String s;}
 {
-    (s=img()) | (header()) | (para()) | (url())
-    {return s;}
+    (s=img()) {return s;}
+   | (s=header()) {return s;}
+    | (s=para()) {return s;}
+    | (s=url()) {return s;}
+
 }
 
 String img():
-{String s;}
+{String s="";}
 {
     "IMAGE " "WITH " "SOURCE " <quote> s=sentence() <quote>
     {return "<img src=\"" + s + "\">";}
 }
 
-void header():
-{}
+String header():
+{String s="";}
 {
-    "HEADING" decorated_text()
+    "HEADING" s=decorated_text()
+    {return "<h1 "+s+"</h1>";}
 }
 
-void para():
-{}
+String para():
+{String s="";}
 {
-    "PARAGRAPH" decorated_text()
+    "PARAGRAPH" s=decorated_text()
+    {return "<p "+s+"</p>";}
 }
 
-void url():
-{}
+String url():
+{String s="";}
 {
-    "LINK" decorated_url()
+    "LINK" s=decorated_url()
+    {return "<a "+s+"</a>";}
 }
 
 String sentence():
-{String s;Token c;}
+{String s="";Token c;}
 {
      c= <alphanumeric> s=sentence() {return c.image + s;} | {return "";}
 }
 
-void decorated_text():
-{}
+String decorated_text():
+{String s=""; String part=""; String decorated="";}
 {
-{System.out.println("Text");
-}
-    (decorated_text_part() (["AND" decorated_text()]))
+    s=decorated_text_part(){decorated = s;}
+
+     (("AND" part=decorated_text(){
+        if(s.contains("style=") && part.contains("style=")){
+            part=part.replace("style=\"","");
+            s=s.replace(";\"",";");
+        }
+        decorated=s+part;})|("AND" decorated_text() |"\n" ))
+    {
+        if(decorated.contains("{TEXT:")){
+            int index=decorated.indexOf("{");
+            int lastIndex=decorated.indexOf("}");
+            String txt=decorated.substring(index+6,lastIndex);
+            decorated=decorated.replace("{TEXT:"+txt+"}","");
+            decorated=decorated+">"+txt;
+        }
+    return decorated;}
 }
 
-void decorated_text_part():
-{}
+String decorated_text_part():
+{String s="";}
 {
-    (text()) | (color()) | (font())
+      (s=text()){return s;}
+     | (s=color()){return s;}
+     |  (s=font()){return s;}
+
 }
 
-void decorated_url():
-{}
+
+String decorated_url():
+{String s=""; String part=""; String decorated="";}
 {
-{System.out.println("url");
-}
-     (decorated_url_part() (["AND" decorated_url()])) | create()
+    s=decorated_url_part(){decorated = s;}
+     (("AND" part=decorated_url(){
+            if(s.contains("style=") && part.contains("style=")){
+                part=part.replace("style=\"","");
+                s=s.replace(";\"",";");
+                System.out.println(part);
+            }
+            decorated=s+part;})|("AND" decorated_url() |"\n")){
+                System.out.println(decorated);
+                 if(decorated.contains("{TEXT:")){
+                     int index=decorated.indexOf("{");
+                     int lastIndex=decorated.indexOf("}");
+                     String txt=decorated.substring(index+6,lastIndex);
+                     decorated=decorated.replace("{TEXT:"+txt+"}","");
+                     decorated=decorated+">"+txt;
+                 }
+         return decorated;}
 }
 
-void decorated_url_part():
-{}
+String decorated_url_part():
+{String s="";}
 {
-    (text()) | (color()) | (font()) | (link())
+    (s=text()){return s;}
+     | (s=color()){return s;}
+     |  (s=font()){return s;}
+     | (s=link()) {return s;}
 }
 
-void link():
-{}
+String link():
+{String s="";}
 {
-    "WITH LINK" <quote> sentence() <quote>
+    "WITH LINK" <quote> s=sentence() <quote>
+
+    {return "href=\""+ s +"\"";}
 }
 
 
-void text():
-{String s;}
+String text():
+{String s="";}
 {
     "WITH TEXT" <quote> s=sentence() <quote>
-    {System.out.println(s);}
 
+    {return "{TEXT:"+ s +"}";}
 }
 
-void color():
-{}
+String color():
+{String s="";}
 {
-    "WITH COLOR" <quote> sentence() <quote>
+    "WITH COLOR" <quote> s=sentence() <quote>
+
+    {return "style=\"color:"+ s +";\"";}
 }
 
-void font():
-{}
+String font():
+{String s="";}
 {
-    "WITH FONT" <quote> sentence() <quote>
+    "WITH FONT" <quote> s=sentence() <quote>
+    {return "style=\"font-family:"+ s +";\"";}
 }
 

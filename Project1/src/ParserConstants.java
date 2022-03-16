@@ -9,9 +9,9 @@ public interface ParserConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int quote = 5;
+  int quote = 4;
   /** RegularExpression Id. */
-  int alphanumeric = 6;
+  int alphanumeric = 5;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -21,7 +21,6 @@ public interface ParserConstants {
     "<EOF>",
     "\" \"",
     "\"\\t\"",
-    "\"\\n\"",
     "\"\\r\"",
     "\"\\\"\"",
     "<alphanumeric>",
@@ -33,6 +32,7 @@ public interface ParserConstants {
     "\"PARAGRAPH\"",
     "\"LINK\"",
     "\"AND\"",
+    "\"\\n\"",
     "\"WITH LINK\"",
     "\"WITH TEXT\"",
     "\"WITH COLOR\"",
