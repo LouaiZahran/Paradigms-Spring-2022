@@ -1,13 +1,39 @@
 PARSER_BEGIN(Parser)
 
 import java.lang.Character;
-
+import java.util.HashMap;
 public class Parser {
+    static HashMap<String ,String> map=new HashMap<>();
     public static void main(String[] args) throws Exception {
         System.out.println(new Parser(System.in).create());
     }
+    static String arranger(){
+            String decorated="";
+            if(map.containsKey("href")){
+               decorated+=" href=\""+map.get("href")+"\"";
+           }
 
-}
+           if(map.containsKey("color")){
+               decorated+=" style=\"color:"+map.get("color")+";";
+           }
+
+           if(map.containsKey("font") && map.containsKey("color")){
+                   decorated+="font-family:"+ map.get("font") +";\"";
+               }
+           else if(map.containsKey("color")){
+               decorated+="\"";
+           }
+           else if(map.containsKey("font")){
+               decorated+=" style=\"font-family:"+ map.get("font") +";\"";
+           }
+           if(map.containsKey("text")){
+               decorated+=">"+map.get("text");
+           }
+           return decorated;
+       }
+    }
+
+
 
 PARSER_END(Parser)
 
@@ -43,21 +69,21 @@ String header():
 {String s="";}
 {
     "HEADING" s=decorated_text()
-    {return "<h1 "+s+"</h1>";}
+    {return "<h1"+s+"</h1>";}
 }
 
 String para():
 {String s="";}
 {
     "PARAGRAPH" s=decorated_text()
-    {return "<p "+s+"</p>";}
+    {return "<p"+s+"</p>";}
 }
 
 String url():
 {String s="";}
 {
     "LINK" s=decorated_url()
-    {return "<a "+s+"</a>";}
+    {return "<a"+s+"</a>";}
 }
 
 String sentence():
@@ -67,97 +93,68 @@ String sentence():
 }
 
 String decorated_text():
-{String s=""; String part=""; String decorated="";}
+{String decorated="";}
 {
-    s=decorated_text_part(){decorated = s;}
-
-     (("AND" part=decorated_text(){
-        if(s.contains("style=") && part.contains("style=")){
-            part=part.replace("style=\"","");
-            s=s.replace(";\"",";");
-        }
-        decorated=s+part;})|"\n" )
-    {
-        if(decorated.contains("{TEXT:")){
-            int index=decorated.indexOf("{");
-            int lastIndex=decorated.indexOf("}");
-            String txt=decorated.substring(index+6,lastIndex);
-            decorated=decorated.replace("{TEXT:"+txt+"}","");
-            decorated=decorated+">"+txt;
-        }
-    return decorated;}
+    decorated_text_part()(("AND" decorated_text())|"\n" )
+        {return arranger();}
 }
 
-String decorated_text_part():
-{String s="";}
+void decorated_text_part():
+{}
 {
-      (s=text()){return s;}
-     | (s=color()){return s;}
-     |  (s=font()){return s;}
+      (text())
+     | (color())
+     |  (font())
 
 }
 
 
 String decorated_url():
-{String s=""; String part=""; String decorated="";}
+{String decorated="";}
 {
-    s=decorated_url_part(){decorated = s;}
-     (("AND" part=decorated_url(){
-            if(s.contains("style=") && part.contains("style=")){
-                part=part.replace("style=\"","");
-                s=s.replace(";\"",";");
-                System.out.println(part);
-            }
-            decorated=s+part;})|"\n"){
-                System.out.println(decorated);
-                 if(decorated.contains("{TEXT:")){
-                     int index=decorated.indexOf("{");
-                     int lastIndex=decorated.indexOf("}");
-                     String txt=decorated.substring(index+6,lastIndex);
-                     decorated=decorated.replace("{TEXT:"+txt+"}","");
-                     decorated=decorated+">"+txt;
-                 }
-         return decorated;}
+    decorated_url_part()(("AND" decorated_url())|"\n")
+
+            {return arranger();}
 }
 
-String decorated_url_part():
-{String s="";}
+void decorated_url_part():
+{}
 {
-    (s=text()){return s;}
-     | (s=color()){return s;}
-     |  (s=font()){return s;}
-     | (s=link()) {return s;}
+    (text())
+     | (color())
+     |  (font())
+     | (link())
 }
 
-String link():
+void link():
 {String s="";}
 {
     "WITH LINK" <quote> s=sentence() <quote>
 
-    {return "href=\""+ s +"\"";}
+    {map.put("href",s);}
 }
 
 
-String text():
+void text():
 {String s="";}
 {
     "WITH TEXT" <quote> s=sentence() <quote>
 
-    {return "{TEXT:"+ s +"}";}
+    {map.put("text",s);}
 }
 
-String color():
+void color():
 {String s="";}
 {
     "WITH COLOR" <quote> s=sentence() <quote>
 
-    {return "style=\"color:"+ s +";\"";}
+    {map.put("color",s);}
 }
 
-String font():
+void font():
 {String s="";}
 {
     "WITH FONT" <quote> s=sentence() <quote>
-    {return "style=\"font-family:"+ s +";\"";}
+    {map.put("font",s);}
 }
 
