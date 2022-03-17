@@ -138,16 +138,17 @@ public class Parser implements ParserConstants {
 }
 
   static final public void decorated_text_part() throws ParseException {
+    jj_consume_token(8);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case 16:{
+    case 15:{
       text();
       break;
       }
-    case 17:{
+    case 16:{
       color();
       break;
       }
-    case 18:{
+    case 17:{
       font();
       break;
       }
@@ -180,20 +181,21 @@ public class Parser implements ParserConstants {
 }
 
   static final public void decorated_url_part() throws ParseException {
+    jj_consume_token(8);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case 16:{
+    case 15:{
       text();
       break;
       }
-    case 17:{
+    case 16:{
       color();
       break;
       }
-    case 18:{
+    case 17:{
       font();
       break;
       }
-    case 15:{
+    case 12:{
       link();
       break;
       }
@@ -205,7 +207,7 @@ public class Parser implements ParserConstants {
 }
 
   static final public void link() throws ParseException {String s="";
-    jj_consume_token(15);
+    jj_consume_token(12);
     jj_consume_token(quote);
     s = sentence();
     jj_consume_token(quote);
@@ -213,7 +215,7 @@ map.put("href",s);
 }
 
   static final public void text() throws ParseException {String s="";
-    jj_consume_token(16);
+    jj_consume_token(15);
     jj_consume_token(quote);
     s = sentence();
     jj_consume_token(quote);
@@ -221,7 +223,7 @@ map.put("text",s);
 }
 
   static final public void color() throws ParseException {String s="";
-    jj_consume_token(17);
+    jj_consume_token(16);
     jj_consume_token(quote);
     s = sentence();
     jj_consume_token(quote);
@@ -229,7 +231,7 @@ map.put("color",s);
 }
 
   static final public void font() throws ParseException {String s="";
-    jj_consume_token(18);
+    jj_consume_token(17);
     jj_consume_token(quote);
     s = sentence();
     jj_consume_token(quote);
@@ -252,7 +254,7 @@ map.put("font",s);
 	   jj_la1_init_0();
 	}
 	private static void jj_la1_init_0() {
-	   jj_la1_0 = new int[] {0x1c80,0x20,0x6000,0x70000,0x6000,0x78000,};
+	   jj_la1_0 = new int[] {0x1c80,0x20,0x6000,0x38000,0x6000,0x39000,};
 	}
 
   /** Constructor with InputStream. */
@@ -398,7 +400,7 @@ map.put("font",s);
   /** Generate ParseException. */
   static public ParseException generateParseException() {
 	 jj_expentries.clear();
-	 boolean[] la1tokens = new boolean[19];
+	 boolean[] la1tokens = new boolean[18];
 	 if (jj_kind >= 0) {
 	   la1tokens[jj_kind] = true;
 	   jj_kind = -1;
@@ -412,7 +414,7 @@ map.put("font",s);
 		 }
 	   }
 	 }
-	 for (int i = 0; i < 19; i++) {
+	 for (int i = 0; i < 18; i++) {
 	   if (la1tokens[i]) {
 		 jj_expentry = new int[1];
 		 jj_expentry[0] = i;

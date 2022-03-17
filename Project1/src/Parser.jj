@@ -44,17 +44,17 @@ TOKEN: {<alphanumeric : ["0"-"9"] | ["a"-"z"] | ["A"-"Z"] | "/" | ":" | "." | "+
 String create():
 {String s;}
 {
-    "ADD" s=element()
+    "ADD " s=element()
     {return s;}
 }
 
 String element():
 {String s;}
 {
-    (s=img()) {return s;}
-   | (s=header()) {return s;}
-    | (s=para()) {return s;}
-    | (s=url()) {return s;}
+     (s=img()) {return s;}
+    |(s=header()) {return s;}
+    |(s=para()) {return s;}
+    |(s=url()) {return s;}
 
 }
 
@@ -68,21 +68,21 @@ String img():
 String header():
 {String s="";}
 {
-    "HEADING" s=decorated_text()
+    "HEADING " s=decorated_text()
     {return "<h1"+s+"</h1>";}
 }
 
 String para():
 {String s="";}
 {
-    "PARAGRAPH" s=decorated_text()
+    "PARAGRAPH " s=decorated_text()
     {return "<p"+s+"</p>";}
 }
 
 String url():
 {String s="";}
 {
-    "LINK" s=decorated_url()
+    "LINK " s=decorated_url()
     {return "<a"+s+"</a>";}
 }
 
@@ -95,42 +95,34 @@ String sentence():
 String decorated_text():
 {String decorated="";}
 {
-    decorated_text_part()(("AND" decorated_text())|"\n" )
-        {return arranger();}
+    decorated_text_part()(("AND " decorated_text())|"\n" )
+    {return arranger();}
 }
 
 void decorated_text_part():
 {}
 {
-      (text())
-     | (color())
-     |  (font())
-
+      "WITH " (text()|color()|font())
 }
 
 
 String decorated_url():
 {String decorated="";}
 {
-    decorated_url_part()(("AND" decorated_url())|"\n")
-
-            {return arranger();}
+    decorated_url_part()(("AND " decorated_url())|"\n")
+    {return arranger();}
 }
 
 void decorated_url_part():
 {}
 {
-    (text())
-     | (color())
-     |  (font())
-     | (link())
+    "WITH " (text()|color()|font()|link())
 }
 
 void link():
 {String s="";}
 {
-    "WITH LINK" <quote> s=sentence() <quote>
-
+    "LINK " <quote> s=sentence() <quote>
     {map.put("href",s);}
 }
 
@@ -138,23 +130,21 @@ void link():
 void text():
 {String s="";}
 {
-    "WITH TEXT" <quote> s=sentence() <quote>
-
+    "TEXT " <quote> s=sentence() <quote>
     {map.put("text",s);}
 }
 
 void color():
 {String s="";}
 {
-    "WITH COLOR" <quote> s=sentence() <quote>
-
+    "COLOR " <quote> s=sentence() <quote>
     {map.put("color",s);}
 }
 
 void font():
 {String s="";}
 {
-    "WITH FONT" <quote> s=sentence() <quote>
+    "FONT " <quote> s=sentence() <quote>
     {map.put("font",s);}
 }
 
