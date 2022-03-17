@@ -37,9 +37,9 @@ public class Parser {
 
 PARSER_END(Parser)
 
-SKIP:  { " " | "\t" | "\r"}
+SKIP:  {"\t" | "\r"}
 TOKEN: {<quote : "\"">}
-TOKEN: {<alphanumeric : ["0"-"9"] | ["a"-"z"] | ["A"-"Z"] | "/" | ":" | "." | "+" | "%" | "&" | "_" >}
+TOKEN: {<alphanumeric : ["0"-"9"] | ["a"-"z"] | ["A"-"Z"] | "/" | ":" | "." | "+" | "%" | "&" | "_" | " " >}
 
 String create():
 {String s;}
@@ -95,7 +95,7 @@ String sentence():
 String decorated_text():
 {String decorated="";}
 {
-    decorated_text_part()(("AND " decorated_text())|"\n" )
+    decorated_text_part()((" AND " decorated_text())|"\n" )
     {return arranger();}
 }
 
@@ -109,7 +109,7 @@ void decorated_text_part():
 String decorated_url():
 {String decorated="";}
 {
-    decorated_url_part()(("AND " decorated_url())|"\n")
+    decorated_url_part()((" AND " decorated_url())|"\n")
     {return arranger();}
 }
 

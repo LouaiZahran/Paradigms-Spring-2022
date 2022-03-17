@@ -9,9 +9,9 @@ public interface ParserConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int quote = 4;
+  int quote = 3;
   /** RegularExpression Id. */
-  int alphanumeric = 5;
+  int alphanumeric = 4;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -19,7 +19,6 @@ public interface ParserConstants {
   /** Literal token values. */
   String[] tokenImage = {
     "<EOF>",
-    "\" \"",
     "\"\\t\"",
     "\"\\r\"",
     "\"\\\"\"",
@@ -31,7 +30,7 @@ public interface ParserConstants {
     "\"HEADING \"",
     "\"PARAGRAPH \"",
     "\"LINK \"",
-    "\"AND \"",
+    "\" AND \"",
     "\"\\n\"",
     "\"TEXT \"",
     "\"COLOR \"",
