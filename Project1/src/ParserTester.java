@@ -22,7 +22,7 @@ public class ParserTester {
     HashMap<String,String> TestTable = new HashMap<String,String>();
 
     void AddTest(String InFile, String OutFile){
-        this.TestTable.put("Project1/tests/"+InFile+".txt","Project1/tests/"+OutFile+".txt");
+        this.TestTable.put("tests/"+InFile+".txt","tests/"+OutFile+".txt");
         N++;
      }
     String ApplyTest(String TestFile) throws FileNotFoundException, ParseException {
@@ -39,11 +39,17 @@ public class ParserTester {
     }
     @TestFactory
     Stream<DynamicTest> Test() {
+        AddTest("Tpf","pf");
+        AddTest("Tuc","uc");
+        AddTest("Tpfc","pfc");
+        AddTest("Tufc","ufc");
         AddTest("Tpara","para");
         AddTest("Thead","head");
+        AddTest("Timg","img");
+        AddTest("Turl","url");
         return IntStream.iterate(0, n -> (n+1)).limit(N)
                 .mapToObj(n -> DynamicTest.dynamicTest((String) TestTable.keySet().toArray()[n],
-                        () -> assertEquals(getExpected(TestTable.get(TestTable.keySet().toArray()[n])),ApplyTest((String)TestTable.keySet().toArray()[n]))));
+                        () -> assertEquals(getExpected(TestTable.get( TestTable.keySet().toArray()[n])),ApplyTest((String)TestTable.keySet().toArray()[n]))));
     }
 
 //    @TestFactory

@@ -1,0 +1,1 @@
+ADD PARAGRAPH WITH FONT "Arial" AND WITH TEXT "Good bye"

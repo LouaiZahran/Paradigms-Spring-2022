@@ -44,8 +44,10 @@ TOKEN: {<alphanumeric : ["0"-"9"] | ["a"-"z"] | ["A"-"Z"] | "/" | ":" | "." | "+
 String create():
 {String s;}
 {
+
     "ADD " s=element()
-    {return s;}
+    {    map.clear();
+         return s;}
 }
 
 String element():
@@ -62,7 +64,7 @@ String img():
 {String s="";}
 {
     "IMAGE " "WITH " "SOURCE " <quote> s=sentence() <quote>
-    {return "<img src=\"" + s + "\">";}
+    {return "<img src=\"" + s + "\" />";}
 }
 
 String header():

@@ -35,7 +35,8 @@ public class Parser implements ParserConstants {
   static final public String create() throws ParseException {String s;
     jj_consume_token(5);
     s = element();
-{if ("" != null) return s;}
+map.clear();
+         {if ("" != null) return s;}
     throw new Error("Missing return statement in function");
 }
 
@@ -76,7 +77,7 @@ public class Parser implements ParserConstants {
     jj_consume_token(quote);
     s = sentence();
     jj_consume_token(quote);
-{if ("" != null) return "<img src=\"" + s + "\">";}
+{if ("" != null) return "<img src=\"" + s + "\" />";}
     throw new Error("Missing return statement in function");
 }
 

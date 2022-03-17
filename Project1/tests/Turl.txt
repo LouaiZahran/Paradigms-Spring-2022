@@ -1,0 +1,1 @@
+ADD LINK WITH TEXT "Search" AND WITH LINK "http://google.com"
