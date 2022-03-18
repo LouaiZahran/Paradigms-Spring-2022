@@ -7,7 +7,10 @@ public class Parser implements ParserConstants {
     public static void main(String[] args) throws Exception {
         Parser parser = new Parser(System.in);
         while(true){
-            System.out.println(parser.create());
+            String result = parser.create();
+            if(result.equals(""))
+                break;
+            System.out.println(result);
         }
     }
     static String arranger(){
@@ -38,10 +41,23 @@ public class Parser implements ParserConstants {
        }
 
   static final public String create() throws ParseException {String s;
-    jj_consume_token(5);
-    s = element();
-map.clear();
-         {if ("" != null) return s;}
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case 5:{
+      jj_consume_token(5);
+      s = element();
+map.clear(); {if ("" != null) return s;}
+      break;
+      }
+    case 0:{
+      jj_consume_token(0);
+{if ("" != null) return "";}
+      break;
+      }
+    default:
+      jj_la1[0] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
     throw new Error("Missing return statement in function");
 }
 
@@ -69,7 +85,7 @@ map.clear();
       break;
       }
     default:
-      jj_la1[0] = jj_gen;
+      jj_la1[1] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -117,7 +133,7 @@ map.clear();
       break;
       }
     default:
-      jj_la1[1] = jj_gen;
+      jj_la1[2] = jj_gen;
 {if ("" != null) return "";}
     }
     throw new Error("Missing return statement in function");
@@ -136,7 +152,7 @@ map.clear();
       break;
       }
     default:
-      jj_la1[2] = jj_gen;
+      jj_la1[3] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -160,7 +176,7 @@ map.clear();
       break;
       }
     default:
-      jj_la1[3] = jj_gen;
+      jj_la1[4] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -179,7 +195,7 @@ map.clear();
       break;
       }
     default:
-      jj_la1[4] = jj_gen;
+      jj_la1[5] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -207,7 +223,7 @@ map.clear();
       break;
       }
     default:
-      jj_la1[5] = jj_gen;
+      jj_la1[6] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -255,13 +271,13 @@ map.put("font",s);
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[6];
+  static final private int[] jj_la1 = new int[7];
   static private int[] jj_la1_0;
   static {
 	   jj_la1_init_0();
 	}
 	private static void jj_la1_init_0() {
-	   jj_la1_0 = new int[] {0x1c80,0x10,0x2040,0x1c000,0x2040,0x1d000,};
+	   jj_la1_0 = new int[] {0x21,0x1c80,0x10,0x2040,0x1c000,0x2040,0x1d000,};
 	}
 
   /** Constructor with InputStream. */
@@ -282,7 +298,7 @@ map.put("font",s);
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 6; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 7; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -296,7 +312,7 @@ map.put("font",s);
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 6; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 7; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -313,7 +329,7 @@ map.put("font",s);
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 6; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 7; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -331,7 +347,7 @@ map.put("font",s);
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 6; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 7; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -347,7 +363,7 @@ map.put("font",s);
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 6; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 7; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -356,7 +372,7 @@ map.put("font",s);
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 6; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 7; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -412,7 +428,7 @@ map.put("font",s);
 	   la1tokens[jj_kind] = true;
 	   jj_kind = -1;
 	 }
-	 for (int i = 0; i < 6; i++) {
+	 for (int i = 0; i < 7; i++) {
 	   if (jj_la1[i] == jj_gen) {
 		 for (int j = 0; j < 32; j++) {
 		   if ((jj_la1_0[i] & (1<<j)) != 0) {

@@ -1,0 +1,6 @@
+ADD IMAGE WITH SOURCE "https://www.w3schools.com/html/pic_trulli.jpg"
+ADD HEADING WITH TEXT "Hello World"
+ADD PARAGRAPH WITH TEXT "Welcome" AND WITH FONT "Arial" AND WITH COLOR "Red"
+ADD LINK WITH TEXT "Search" AND WITH LINK "http://google.com"
+ADD LINK WITH TEXT "Email" AND WITH LINK "http://gmail.com" AND WITH COLOR "Green"
+ADD PARAGRAPH WITH FONT "Arial" AND WITH TEXT "Good bye"

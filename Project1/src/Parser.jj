@@ -7,7 +7,10 @@ public class Parser {
     public static void main(String[] args) throws Exception {
         Parser parser = new Parser(System.in);
         while(true){
-            System.out.println(parser.create());
+            String result = parser.create();
+            if(result.equals(""))
+                break;
+            System.out.println(result);
         }
     }
     static String arranger(){
@@ -50,9 +53,9 @@ String create():
 {String s;}
 {
 
-    "ADD " s=element()
-    {    map.clear();
-         return s;}
+    "ADD " s=element() {map.clear(); return s;}
+    |
+    <EOF> {return "";}
 }
 
 String element():
