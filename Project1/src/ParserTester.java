@@ -55,7 +55,7 @@ public class ParserTester {
 
     Stream<DynamicTest> ValidTest() {
 
-    ArrayList<String> Valid= new ArrayList<String>;
+    ArrayList<String> Valid= new ArrayList<String>();
 
         //Validations.add("...");
 
@@ -79,7 +79,7 @@ assertThrows(Exception.class,()->{
 
     Stream<DynamicTest> NonValidTest() {
 
-    ArrayList<String> NonValid= new ArrayList<String>;
+    ArrayList<String> NonValid= new ArrayList<String>();
 
         //Validations.add("...");
 
