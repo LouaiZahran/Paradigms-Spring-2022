@@ -67,7 +67,7 @@ public class ParserTester {
 
 assertThrows(Exception.class,()->{
 
-                        ApplyTest(Valid.get(n);});}));
+                        ApplyTest(Valid.get(n));});});
 
       
 
@@ -91,7 +91,7 @@ assertThrows(Exception.class,()->{
 
 assertDoesNotThrow(Exception.class,()->{
 
-                        ApplyTest(NonValid.get(n);});}));
+                        ApplyTest(NonValid.get(n));});});
 
       
 
