@@ -5,7 +5,10 @@ import java.util.HashMap;
 public class Parser implements ParserConstants {
     static HashMap<String ,String> map=new HashMap<>();
     public static void main(String[] args) throws Exception {
-        System.out.println(new Parser(System.in).create());
+        Parser parser = new Parser(System.in);
+        while(true){
+            System.out.println(parser.create());
+        }
     }
     static String arranger(){
             String decorated="";
@@ -29,6 +32,8 @@ public class Parser implements ParserConstants {
            if(map.containsKey("text")){
                decorated+=">"+map.get("text");
            }
+           else
+               decorated+=">";
            return decorated;
        }
 
@@ -42,22 +47,23 @@ map.clear();
 
   static final public String element() throws ParseException {String s;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case 6:{
+    case 7:{
       s = img();
-{if ("" != null) return s;}
-      break;
-      }
-    case 9:{
-      s = header();
+      jj_consume_token(6);
 {if ("" != null) return s;}
       break;
       }
     case 10:{
-      s = para();
+      s = header();
 {if ("" != null) return s;}
       break;
       }
     case 11:{
+      s = para();
+{if ("" != null) return s;}
+      break;
+      }
+    case 12:{
       s = url();
 {if ("" != null) return s;}
       break;
@@ -71,9 +77,9 @@ map.clear();
 }
 
   static final public String img() throws ParseException {String s="";
-    jj_consume_token(6);
     jj_consume_token(7);
     jj_consume_token(8);
+    jj_consume_token(9);
     jj_consume_token(quote);
     s = sentence();
     jj_consume_token(quote);
@@ -82,21 +88,21 @@ map.clear();
 }
 
   static final public String header() throws ParseException {String s="";
-    jj_consume_token(9);
+    jj_consume_token(10);
     s = decorated_text();
 {if ("" != null) return "<h1"+s+"</h1>";}
     throw new Error("Missing return statement in function");
 }
 
   static final public String para() throws ParseException {String s="";
-    jj_consume_token(10);
+    jj_consume_token(11);
     s = decorated_text();
 {if ("" != null) return "<p"+s+"</p>";}
     throw new Error("Missing return statement in function");
 }
 
   static final public String url() throws ParseException {String s="";
-    jj_consume_token(11);
+    jj_consume_token(12);
     s = decorated_url();
 {if ("" != null) return "<a"+s+"</a>";}
     throw new Error("Missing return statement in function");
@@ -120,13 +126,13 @@ map.clear();
   static final public String decorated_text() throws ParseException {String decorated="";
     decorated_text_part();
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case 12:{
-      jj_consume_token(12);
+    case 13:{
+      jj_consume_token(13);
       decorated_text();
       break;
       }
-    case 13:{
-      jj_consume_token(13);
+    case 6:{
+      jj_consume_token(6);
       break;
       }
     default:
@@ -139,7 +145,7 @@ map.clear();
 }
 
   static final public void decorated_text_part() throws ParseException {
-    jj_consume_token(7);
+    jj_consume_token(8);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case 14:{
       text();
@@ -163,13 +169,13 @@ map.clear();
   static final public String decorated_url() throws ParseException {String decorated="";
     decorated_url_part();
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case 12:{
-      jj_consume_token(12);
+    case 13:{
+      jj_consume_token(13);
       decorated_url();
       break;
       }
-    case 13:{
-      jj_consume_token(13);
+    case 6:{
+      jj_consume_token(6);
       break;
       }
     default:
@@ -182,7 +188,7 @@ map.clear();
 }
 
   static final public void decorated_url_part() throws ParseException {
-    jj_consume_token(7);
+    jj_consume_token(8);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case 14:{
       text();
@@ -196,7 +202,7 @@ map.clear();
       font();
       break;
       }
-    case 11:{
+    case 12:{
       link();
       break;
       }
@@ -208,7 +214,7 @@ map.clear();
 }
 
   static final public void link() throws ParseException {String s="";
-    jj_consume_token(11);
+    jj_consume_token(12);
     jj_consume_token(quote);
     s = sentence();
     jj_consume_token(quote);
@@ -255,7 +261,7 @@ map.put("font",s);
 	   jj_la1_init_0();
 	}
 	private static void jj_la1_init_0() {
-	   jj_la1_0 = new int[] {0xe40,0x10,0x3000,0x1c000,0x3000,0x1c800,};
+	   jj_la1_0 = new int[] {0x1c80,0x10,0x2040,0x1c000,0x2040,0x1d000,};
 	}
 
   /** Constructor with InputStream. */

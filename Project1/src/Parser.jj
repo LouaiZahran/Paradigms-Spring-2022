@@ -5,7 +5,10 @@ import java.util.HashMap;
 public class Parser {
     static HashMap<String ,String> map=new HashMap<>();
     public static void main(String[] args) throws Exception {
-        System.out.println(new Parser(System.in).create());
+        Parser parser = new Parser(System.in);
+        while(true){
+            System.out.println(parser.create());
+        }
     }
     static String arranger(){
             String decorated="";
@@ -29,6 +32,8 @@ public class Parser {
            if(map.containsKey("text")){
                decorated+=">"+map.get("text");
            }
+           else
+               decorated+=">";
            return decorated;
        }
     }
@@ -39,7 +44,7 @@ PARSER_END(Parser)
 
 SKIP:  {"\t" | "\r"}
 TOKEN: {<quote : "\"">}
-TOKEN: {<alphanumeric : ["0"-"9"] | ["a"-"z"] | ["A"-"Z"] | "/" | ":" | "." | "+" | "%" | "&" | "_" | " " >}
+TOKEN: {<alphanumeric : ["0"-"9"] | ["a"-"z"] | ["A"-"Z"] | "/" | ":" | "." | "+" | "%" | "&" | "_" | " " | "'">}
 
 String create():
 {String s;}
@@ -53,10 +58,10 @@ String create():
 String element():
 {String s;}
 {
-     (s=img()) {return s;}
-    |(s=header()) {return s;}
-    |(s=para()) {return s;}
-    |(s=url()) {return s;}
+     (s=img() "\n")  {return s;}
+    |(s=header())    {return s;}
+    |(s=para())      {return s;}
+    |(s=url())       {return s;}
 
 }
 
