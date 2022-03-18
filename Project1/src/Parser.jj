@@ -1,152 +1,152 @@
-//PARSER_BEGIN(Parser)
-//
-//import java.lang.Character;
-//import java.util.HashMap;
-//public class Parser {
-//    static HashMap<String ,String> map=new HashMap<>();
-//    public static void main(String[] args) throws Exception {
-//        System.out.println(new Parser(System.in).create());
-//    }
-//    static String arranger(){
-//            String decorated="";
-//            if(map.containsKey("href")){
-//               decorated+=" href=\""+map.get("href")+"\"";
-//           }
-//
-//           if(map.containsKey("color")){
-//               decorated+=" style=\"color:"+map.get("color")+";";
-//           }
-//
-//           if(map.containsKey("font") && map.containsKey("color")){
-//                   decorated+="font-family:"+ map.get("font") +";\"";
-//               }
-//           else if(map.containsKey("color")){
-//               decorated+="\"";
-//           }
-//           else if(map.containsKey("font")){
-//               decorated+=" style=\"font-family:"+ map.get("font") +";\"";
-//           }
-//           if(map.containsKey("text")){
-//               decorated+=">"+map.get("text");
-//           }
-//           return decorated;
-//       }
-//    }
-//
-//
-//
-//PARSER_END(Parser)
-//
-//SKIP:  {"\t" | "\r"}
-//TOKEN: {<quote : "\"">}
-//TOKEN: {<alphanumeric : ["0"-"9"] | ["a"-"z"] | ["A"-"Z"] | "/" | ":" | "." | "+" | "%" | "&" | "_" | " " >}
-//
-//String create():
-//{String s;}
-//{
-//
-//    "ADD " s=element()
-//    {    map.clear();
-//         return s;}
-//}
-//
-//String element():
-//{String s;}
-//{
-//     (s=img()) {return s;}
-//    |(s=header()) {return s;}
-//    |(s=para()) {return s;}
-//    |(s=url()) {return s;}
-//
-//}
-//
-//String img():
-//{String s="";}
-//{
-//    "IMAGE " "WITH " "SOURCE " <quote> s=sentence() <quote>
-//    {return "<img src=\"" + s + "\" />";}
-//}
-//
-//String header():
-//{String s="";}
-//{
-//    "HEADING " s=decorated_text()
-//    {return "<h1"+s+"</h1>";}
-//}
-//
-//String para():
-//{String s="";}
-//{
-//    "PARAGRAPH " s=decorated_text()
-//    {return "<p"+s+"</p>";}
-//}
-//
-//String url():
-//{String s="";}
-//{
-//    "LINK " s=decorated_url()
-//    {return "<a"+s+"</a>";}
-//}
-//
-//String sentence():
-//{String s="";Token c;}
-//{
-//     c= <alphanumeric> s=sentence() {return c.image + s;} | {return "";}
-//}
-//
-//String decorated_text():
-//{String decorated="";}
-//{
-//    decorated_text_part()((" AND " decorated_text())|"\n" )
-//    {return arranger();}
-//}
-//
-//void decorated_text_part():
-//{}
-//{
-//      "WITH " (text()|color()|font())
-//}
-//
-//
-//String decorated_url():
-//{String decorated="";}
-//{
-//    decorated_url_part()((" AND " decorated_url())|"\n")
-//    {return arranger();}
-//}
-//
-//void decorated_url_part():
-//{}
-//{
-//    "WITH " (text()|color()|font()|link())
-//}
-//
-//void link():
-//{String s="";}
-//{
-//    "LINK " <quote> s=sentence() <quote>
-//    {map.put("href",s);}
-//}
-//
-//
-//void text():
-//{String s="";}
-//{
-//    "TEXT " <quote> s=sentence() <quote>
-//    {map.put("text",s);}
-//}
-//
-//void color():
-//{String s="";}
-//{
-//    "COLOR " <quote> s=sentence() <quote>
-//    {map.put("color",s);}
-//}
-//
-//void font():
-//{String s="";}
-//{
-//    "FONT " <quote> s=sentence() <quote>
-//    {map.put("font",s);}
-//}
-//
+PARSER_BEGIN(Parser)
+
+import java.lang.Character;
+import java.util.HashMap;
+public class Parser {
+    static HashMap<String ,String> map=new HashMap<>();
+    public static void main(String[] args) throws Exception {
+        System.out.println(new Parser(System.in).create());
+    }
+    static String arranger(){
+            String decorated="";
+            if(map.containsKey("href")){
+               decorated+=" href=\""+map.get("href")+"\"";
+           }
+
+           if(map.containsKey("color")){
+               decorated+=" style=\"color:"+map.get("color")+";";
+           }
+
+           if(map.containsKey("font") && map.containsKey("color")){
+                   decorated+="font-family:"+ map.get("font") +";\"";
+               }
+           else if(map.containsKey("color")){
+               decorated+="\"";
+           }
+           else if(map.containsKey("font")){
+               decorated+=" style=\"font-family:"+ map.get("font") +";\"";
+           }
+           if(map.containsKey("text")){
+               decorated+=">"+map.get("text");
+           }
+           return decorated;
+       }
+    }
+
+
+
+PARSER_END(Parser)
+
+SKIP:  {"\t" | "\r"}
+TOKEN: {<quote : "\"">}
+TOKEN: {<alphanumeric : ["0"-"9"] | ["a"-"z"] | ["A"-"Z"] | "/" | ":" | "." | "+" | "%" | "&" | "_" | " " >}
+
+String create():
+{String s;}
+{
+
+    "ADD " s=element()
+    {    map.clear();
+         return s;}
+}
+
+String element():
+{String s;}
+{
+     (s=img()) {return s;}
+    |(s=header()) {return s;}
+    |(s=para()) {return s;}
+    |(s=url()) {return s;}
+
+}
+
+String img():
+{String s="";}
+{
+    "IMAGE " "WITH " "SOURCE " <quote> s=sentence() <quote>
+    {return "<img src=\"" + s + "\" />";}
+}
+
+String header():
+{String s="";}
+{
+    "HEADING " s=decorated_text()
+    {return "<h1"+s+"</h1>";}
+}
+
+String para():
+{String s="";}
+{
+    "PARAGRAPH " s=decorated_text()
+    {return "<p"+s+"</p>";}
+}
+
+String url():
+{String s="";}
+{
+    "LINK " s=decorated_url()
+    {return "<a"+s+"</a>";}
+}
+
+String sentence():
+{String s="";Token c;}
+{
+     c= <alphanumeric> s=sentence() {return c.image + s;} | {return "";}
+}
+
+String decorated_text():
+{String decorated="";}
+{
+    decorated_text_part()((" AND " decorated_text())|"\n" )
+    {return arranger();}
+}
+
+void decorated_text_part():
+{}
+{
+      "WITH " (text()|color()|font())
+}
+
+
+String decorated_url():
+{String decorated="";}
+{
+    decorated_url_part()((" AND " decorated_url())|"\n")
+    {return arranger();}
+}
+
+void decorated_url_part():
+{}
+{
+    "WITH " (text()|color()|font()|link())
+}
+
+void link():
+{String s="";}
+{
+    "LINK " <quote> s=sentence() <quote>
+    {map.put("href",s);}
+}
+
+
+void text():
+{String s="";}
+{
+    "TEXT " <quote> s=sentence() <quote>
+    {map.put("text",s);}
+}
+
+void color():
+{String s="";}
+{
+    "COLOR " <quote> s=sentence() <quote>
+    {map.put("color",s);}
+}
+
+void font():
+{String s="";}
+{
+    "FONT " <quote> s=sentence() <quote>
+    {map.put("font",s);}
+}
+

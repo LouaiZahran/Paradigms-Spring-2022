@@ -1,6 +1,4 @@
 import org.junit.jupiter.api.DynamicTest;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Test.*;
 import org.junit.jupiter.api.TestFactory;
 
 import java.io.*;
@@ -8,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -82,24 +79,14 @@ public class ParserTester {
                                         return false;
                                     }
                                     return true;});
-//                                assertTrue(()-> {
-//                                    try {
-//                                        ApplyTest(Valid.get(n));
-//                                        return true;
-//                                    } catch (Exception e) {
-//                                        return false;
-//                                    }
-//                                });
+
                         }));
 
       
 
 }
 
-    
-
-            @TestFactory
-
+    @TestFactory
     Stream<DynamicTest> NonValidTest() {
 
                 ArrayList<String> NonValid = new ArrayList<String>(Arrays.asList("NonValid_0", "NonValid_1", "NonValid_2",
@@ -125,13 +112,5 @@ public class ParserTester {
                             }
                         })));
 
-}
-
-
-
-
-
-
-
-
+    }
 }

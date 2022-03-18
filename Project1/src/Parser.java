@@ -32,8 +32,7 @@ public class Parser implements ParserConstants {
            return decorated;
        }
 
-  static final public String create() throws ParseException {
-    String s;
+  static final public String create() throws ParseException {String s;
     jj_consume_token(5);
     s = element();
 map.clear();
