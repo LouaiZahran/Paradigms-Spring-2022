@@ -51,6 +51,51 @@ public class ParserTester {
                 .mapToObj(n -> DynamicTest.dynamicTest((String) TestTable.keySet().toArray()[n],
                         () -> assertEquals(getExpected(TestTable.get( TestTable.keySet().toArray()[n])),ApplyTest((String)TestTable.keySet().toArray()[n]))));
     }
+              @TestFactory
+
+    Stream<DynamicTest> ValidTest() {
+
+    ArrayList<String> Valid= new ArrayList<String>;
+
+        //Validations.add("...");
+
+        return IntStream.iterate(0, n -> (n+1)).limit(ValidTest.Size())
+
+                .mapToObj(n -> DynamicTest.dynamicTest(Valid.get(n),
+
+                        () ->{                      
+
+assertThrows(Exception.class,()->{
+
+                        ApplyTest(Valid.get(n);});}));
+
+      
+
+}
+
+    
+
+            @TestFactory
+
+    Stream<DynamicTest> NonValidTest() {
+
+    ArrayList<String> NonValid= new ArrayList<String>;
+
+        //Validations.add("...");
+
+        return IntStream.iterate(0, n -> (n+1)).limit(NonValidTest.Size())
+
+                .mapToObj(n -> DynamicTest.dynamicTest(NonValid.get(n),
+
+                        () ->{                      
+
+assertDoesNotThrow(Exception.class,()->{
+
+                        ApplyTest(NonValid.get(n);});}));
+
+      
+
+}
 
 //    @TestFactory
 //    Collection<DynamicTest> StartTesting() throws FileNotFoundException, ParseException {
