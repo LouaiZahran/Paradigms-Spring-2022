@@ -1,0 +1,1 @@
+ADD PARAGRAPH WITH TEXT "Welcome" AND FONT "Arial" AND COLOR "Red"

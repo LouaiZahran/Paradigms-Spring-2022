@@ -120,9 +120,7 @@ public class ParseException extends Exception {
       retval += " \"";
       tok = tok.next;
     }
-    if (currentToken.next != null) {
-      retval += "\" at line " + currentToken.next.beginLine + ", column " + currentToken.next.beginColumn;
-    }
+    retval += "\" at line " + currentToken.next.beginLine + ", column " + currentToken.next.beginColumn;
     retval += "." + EOL;
     
     
@@ -190,4 +188,4 @@ public class ParseException extends Exception {
    }
 
 }
-/* JavaCC - OriginalChecksum=eb0876485108fbb74532790f1f3fce82 (do not edit this line) */
+/* JavaCC - OriginalChecksum=4e6a26538620f560a08cdb490e6fb3c2 (do not edit this line) */
