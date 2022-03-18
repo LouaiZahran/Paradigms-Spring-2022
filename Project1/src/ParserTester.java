@@ -59,7 +59,7 @@ public class ParserTester {
 
         //Validations.add("...");
 
-        return IntStream.iterate(0, n -> (n+1)).limit(ValidTest.Size())
+        return IntStream.iterate(0, n -> (n+1)).limit(Valid.Size())
 
                 .mapToObj(n -> DynamicTest.dynamicTest(Valid.get(n),
 
@@ -83,7 +83,7 @@ assertThrows(Exception.class,()->{
 
         //Validations.add("...");
 
-        return IntStream.iterate(0, n -> (n+1)).limit(NonValidTest.Size())
+        return IntStream.iterate(0, n -> (n+1)).limit(NonValid.Size())
 
                 .mapToObj(n -> DynamicTest.dynamicTest(NonValid.get(n),
 
@@ -97,15 +97,11 @@ assertDoesNotThrow(Exception.class,()->{
 
 }
 
-//    @TestFactory
-//    Collection<DynamicTest> StartTesting() throws FileNotFoundException, ParseException {
-//        return Arrays.asList(
-//            DynamicTest.dynamicTest()
-//        );
-//        String res = ApplyTest("Paragraph");
-//        System.out.println(res);
-//        assertEquals("<p>test</p>",res);
-//    }
+
+
+
+
+
 
 
 }
