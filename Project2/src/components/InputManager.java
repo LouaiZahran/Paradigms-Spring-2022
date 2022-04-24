@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class InputManager {
-    public static void getObjects(String filepath,HashMap<Long,object>map) throws IOException{
+    public void getObjects(String filepath,HashMap<Long,object>map) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filepath)); 
         String line="";
         String[] seg;
@@ -18,7 +18,7 @@ public class InputManager {
         }
         reader.close();
     }
-    public static void getNetwork(String filepath,HashMap<Long,ArrayList<Long>>map) throws IOException{
+    public void getNetwork(String filepath,HashMap<Long,ArrayList<Long>>map) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filepath)); 
         String line="";
         String[] seg;
@@ -36,7 +36,7 @@ public class InputManager {
     /*
     * 
     */
-    public static ArrayList<Long> getActiveObjects(String filepath) throws IOException{
+    public ArrayList<Long> getActiveObjects(String filepath) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filepath)); 
         String line="";
         
