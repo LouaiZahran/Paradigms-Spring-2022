@@ -36,7 +36,7 @@ public class InputManager {
     /*
     * 
     */
-    public static ArrayList<Long> assignActiveObjects(String filepath,HashMap<Long,Boolean> active) throws IOException{
+    public static ArrayList<Long> getActiveObjects(String filepath) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filepath)); 
         String line="";
         
