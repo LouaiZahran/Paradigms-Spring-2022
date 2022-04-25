@@ -25,6 +25,12 @@ public class Heap {
             e.printStackTrace();
         }
     }
+    public Heap(HashMap<Integer, Obj> map, HashMap<Integer, ArrayList<Integer>> adj, ArrayList<Integer> roots) {
+    this.objects=map;
+    this.network=adj;
+    this.activeIds=roots;
+    }
+
     public void print(){
         for (Integer id : objects.keySet()) {
             System.out.println(", "+id+": from "+objects.get(id).start+" to "+objects.get(id).end);

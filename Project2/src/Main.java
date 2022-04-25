@@ -1,11 +1,15 @@
 
+import components.Heap;
 import components.InputManager;
 import components.Obj;
+import components.OutputManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import GarbageCollectors.mark_sweep;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -34,5 +38,8 @@ public class Main {
         ArrayList<Integer> roots = InputManager.getActiveObjects("roots.csv");
         for(Integer root: roots)
             System.out.println(root);
+        Heap myHeap = new Heap(map, adj, roots);
+        mark_sweep.collect(myHeap);
+        OutputManager.writeHeap(myHeap,"res.csv");
     }
 }
