@@ -1,4 +1,5 @@
 
+import GarbageCollectors.MarkCompact;
 import components.*;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ import GarbageCollectors.mark_sweep;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        InputGenerator.generate();
+        //InputGenerator.generate();
 
         System.out.println("Heap.csv read test");
         System.out.println("ID: startAddress -> endAddress\n");
@@ -38,7 +39,7 @@ public class Main {
         for(Integer root: roots)
             System.out.println(root);
         Heap myHeap = new Heap(map, adj, roots);
-        mark_sweep.collect(myHeap);
+        MarkCompact.markAndCompact(myHeap);
         OutputManager.writeHeap(myHeap,"res.csv");
     }
 }

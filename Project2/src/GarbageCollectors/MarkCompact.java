@@ -3,7 +3,7 @@ package GarbageCollectors;
 import components.Heap;
 
 public class MarkCompact extends mark_sweep{
-    public void markAndCompact(Heap heap){
+    public static void markAndCompact(Heap heap){
         mark_sweep.collect(heap);
         int count=1;
         for(Integer i:heap.objects.keySet()){
