@@ -1,2 +1,6 @@
 
 .vscode/settings.json
+heap.csv
+pointers.csv
+res.csv
+roots.csv
