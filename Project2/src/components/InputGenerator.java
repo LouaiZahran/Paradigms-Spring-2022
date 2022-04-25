@@ -22,7 +22,7 @@ public class InputGenerator {
         }
 
         for(int i=0; i<num; i++){
-            if(Math.random()>=0.5)
+            if(Math.random()<=0.1)
                 roots.add(list.get(i));
         }
 
@@ -30,7 +30,7 @@ public class InputGenerator {
             Obj parent = list.get(i);
             ArrayList<Obj> neighbors = new ArrayList<>();
             for(int j=0; j<num; j++){
-                if(Math.random()>=0.3)
+                if(Math.random()<=0.1)
                     neighbors.add(list.get(j));
             }
             adj.put(parent, neighbors);

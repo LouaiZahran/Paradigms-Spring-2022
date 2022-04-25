@@ -1,8 +1,5 @@
 
-import components.Heap;
-import components.InputManager;
-import components.Obj;
-import components.OutputManager;
+import components.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +10,8 @@ import GarbageCollectors.mark_sweep;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        InputGenerator.generate();
+
         System.out.println("Heap.csv read test");
         System.out.println("ID: startAddress -> endAddress\n");
         HashMap<Integer, Obj> map = InputManager.getObjects("heap.csv");
