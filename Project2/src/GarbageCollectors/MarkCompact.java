@@ -5,7 +5,7 @@ import components.Heap;
 public class MarkCompact extends mark_sweep{
     public static void markAndCompact(Heap heap){
         mark_sweep.collect(heap);
-        int count=1;
+        int count=0;
         for(Integer i:heap.objects.keySet()){
             if(heap.objects.get(i)!=null){
                 int start=heap.objects.get(i).getStart();

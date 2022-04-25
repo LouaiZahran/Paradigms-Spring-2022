@@ -2,15 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01f91a45-6779-44f1-80e5-b335385bd78f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project2/src/GarbageCollectors/Copy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/src/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/src/ParserTokenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/ParserTokenManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project2/heap.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project2/out/production/Project2/GarbageCollectors/MarkCompact.class" beforeDir="false" afterPath="$PROJECT_DIR$/Project2/out/production/Project2/GarbageCollectors/MarkCompact.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project2/out/production/Project2/GarbageCollectors/mark_sweep.class" beforeDir="false" afterPath="$PROJECT_DIR$/Project2/out/production/Project2/GarbageCollectors/mark_sweep.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project2/out/production/Project2/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Project2/out/production/Project2/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project2/out/production/Project2/components/InputGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/Project2/out/production/Project2/components/InputGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project2/out/production/Project2/components/InputManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/Project2/out/production/Project2/components/InputManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project2/out/production/Project2/components/Obj.class" beforeDir="false" afterPath="$PROJECT_DIR$/Project2/out/production/Project2/components/Obj.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project2/out/production/Project2/components/OutputManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/Project2/out/production/Project2/components/OutputManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project2/out/production/Project2/components/heap.class" beforeDir="false" afterPath="$PROJECT_DIR$/Project2/out/production/Project2/components/heap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project2/pointers.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project2/res.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project2/roots.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project2/src/GarbageCollectors/MarkCompact.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project2/src/GarbageCollectors/MarkCompact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project2/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project2/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/heap.csv" beforeDir="false" afterPath="$PROJECT_DIR$/heap.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pointers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/pointers.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res.csv" beforeDir="false" afterPath="$PROJECT_DIR$/res.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/roots.csv" beforeDir="false" afterPath="$PROJECT_DIR$/roots.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -26,7 +51,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Project2/Project2.iml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Project2" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -35,17 +60,6 @@
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Project2" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -77,5 +91,9 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Paradigms_Spring_2022$Main.ic" NAME="Main Coverage Results" MODIFIED="1650895676834" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

@@ -1,4 +1,5 @@
 
+import GarbageCollectors.Copy;
 import GarbageCollectors.MarkCompact;
 import components.*;
 
@@ -39,7 +40,9 @@ public class Main {
         for(Integer root: roots)
             System.out.println(root);
         Heap myHeap = new Heap(map, adj, roots);
+        Copy.collect(myHeap);
         MarkCompact.markAndCompact(myHeap);
-        OutputManager.writeHeap(myHeap,"res.csv");
+        OutputManager.writeHeap(Copy.getResultHeap(),"Copy res.csv");
+        OutputManager.writeHeap(myHeap,"Mark and Compact res.csv");
     }
 }
