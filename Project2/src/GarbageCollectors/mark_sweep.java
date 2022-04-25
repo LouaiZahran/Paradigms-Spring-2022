@@ -4,14 +4,17 @@ import java.util.HashMap;
 
 import components.Heap;
 
-public class mark_sweep implements IGC {
-    void mark(Integer id, Heap heap, HashMap<Integer,Boolean> marked){
-        marked.put(id, true);
+public class mark_sweep{
+    public static void mark(Integer id, Heap heap, HashMap<Integer,Boolean> marked){
+        if(marked.get(id)!=null&&marked.get(id)){
+            return;
+        }
+        marked.put(id,true);
         for (Integer child : heap.network.get(id)) {
             mark(child, heap, marked);
         }
     }
-    public void collect(Heap heap){
+    public static void collect(Heap heap){
         HashMap<Integer,Boolean> marked=new HashMap<>();
         //marking
         for (Integer id : heap.objects.keySet()) {

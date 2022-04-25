@@ -19,6 +19,7 @@ public class OutputManager {
                 sb.append("\n");
             }
             writer.write(sb.toString());
+            writer.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

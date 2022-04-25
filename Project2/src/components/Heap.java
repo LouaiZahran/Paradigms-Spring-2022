@@ -26,5 +26,17 @@ public class Heap {
             e.printStackTrace();
         }
     }
+    public void print(){
+        for (Integer id : objects.keySet()) {
+            System.out.println(", "+id+": from "+objects.get(id).start+" to "+objects.get(id).end);
+        }
+        for (Integer id : network.keySet()) {
+            System.out.print(id+" -> ");
+            for (Integer c : network.get(id)) {
+                System.out.print(", "+c);
+            }
+            System.out.print("\n");
+        }
+    }
     
 }
