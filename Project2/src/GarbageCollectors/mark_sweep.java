@@ -11,12 +11,21 @@ public class mark_sweep {
         for (Long id : Heap.objects.keySet()) {
             if(Heap.activeIds.contains(id)){
                 marked.put(id, true);
+                for (Long child : Heap.network.get(id)) {
+                    marked.put(child, true);
+                }
             }
             else{
-                marked.put(id, false);
+                Boolean a;
+                Boolean b = ((a = marked.get(id))==null)?false:a;
+                marked.put(id,b);
             }
         }
-        //swapping
-        
+        //sweeping
+        for (Long id : Heap.objects.keySet()) {
+            if(!marked.get(id)){
+                Heap.objects.remove(id);
+            }
+        }
     }
 }
