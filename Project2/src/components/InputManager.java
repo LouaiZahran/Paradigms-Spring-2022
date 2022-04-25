@@ -1,7 +1,6 @@
 package components;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class InputManager {
         reader.close();
     }
     /*
-    * 
+    *
     */
     public ArrayList<Integer> getActiveObjects(String filepath) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filepath)); 
