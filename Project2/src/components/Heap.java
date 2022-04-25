@@ -20,8 +20,8 @@ public class Heap {
         this.network=new HashMap<>();
         try {
             this.activeIds = i.getActiveObjects(activeids_f);
-            i.getObjects(objects_f, this.objects);
-            i.getNetwork(network_f, this.network);
+            this.objects = i.getObjects(objects_f);
+            this.network = i.getNetwork(network_f);
         } catch (IOException e) {
             e.printStackTrace();
         }

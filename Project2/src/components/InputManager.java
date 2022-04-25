@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class InputManager {
-    public void getObjects(String filepath,HashMap<Integer, Obj>map) throws IOException{
+    public static HashMap<Integer, Obj> getObjects(String filepath) throws IOException{
+        HashMap<Integer, Obj> map = new HashMap<>();
         BufferedReader reader = new BufferedReader(new FileReader(filepath)); 
         String line="";
         String[] seg;
@@ -16,8 +17,10 @@ public class InputManager {
             map.put(Integer.parseInt(seg[0]),new Obj(Integer.parseInt(seg[0]), Integer.parseInt(seg[1]),Integer.parseInt(seg[2])));
         }
         reader.close();
+        return map;
     }
-    public void getNetwork(String filepath,HashMap<Integer,ArrayList<Integer>>map) throws IOException{
+    public static HashMap<Integer,ArrayList<Integer>> getNetwork(String filepath) throws IOException{
+        HashMap<Integer,ArrayList<Integer>> map = new HashMap<>();
         BufferedReader reader = new BufferedReader(new FileReader(filepath)); 
         String line="";
         String[] seg;
@@ -31,11 +34,12 @@ public class InputManager {
             list.add(Integer.parseInt(seg[1]));
         }
         reader.close();
+        return map;
     }
     /*
     *
     */
-    public ArrayList<Integer> getActiveObjects(String filepath) throws IOException{
+    public static ArrayList<Integer> getActiveObjects(String filepath) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filepath)); 
         String line="";
         
