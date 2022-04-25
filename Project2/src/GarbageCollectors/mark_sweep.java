@@ -6,12 +6,12 @@ import components.heap;
 
 public class mark_sweep {
     public static void collect(heap Heap){
-        HashMap<Long,Boolean> marked=new HashMap<>();
+        HashMap<Integer,Boolean> marked=new HashMap<>();
         //marking
-        for (Long id : Heap.objects.keySet()) {
+        for (Integer id : Heap.objects.keySet()) {
             if(Heap.activeIds.contains(id)){
                 marked.put(id, true);
-                for (Long child : Heap.network.get(id)) {
+                for (Integer child : Heap.network.get(id)) {
                     marked.put(child, true);
                 }
             }
@@ -22,7 +22,7 @@ public class mark_sweep {
             }
         }
         //sweeping
-        for (Long id : Heap.objects.keySet()) {
+        for (Integer id : Heap.objects.keySet()) {
             if(!marked.get(id)){
                 Heap.objects.remove(id);
             }

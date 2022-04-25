@@ -8,41 +8,41 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class InputManager {
-    public void getObjects(String filepath,HashMap<Long,object>map) throws IOException{
+    public void getObjects(String filepath,HashMap<Integer,object>map) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filepath)); 
         String line="";
         String[] seg;
         while ((line = reader.readLine()) != null){
             seg=line.split(",");
-            map.put(Long.parseLong(seg[0]),new object(Long.parseLong(seg[0]), Integer.parseInt(seg[1]),Integer.parseInt(seg[2])));
+            map.put(Integer.parseInt(seg[0]),new object(Integer.parseInt(seg[0]), Integer.parseInt(seg[1]),Integer.parseInt(seg[2])));
         }
         reader.close();
     }
-    public void getNetwork(String filepath,HashMap<Long,ArrayList<Long>>map) throws IOException{
+    public void getNetwork(String filepath,HashMap<Integer,ArrayList<Integer>>map) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filepath)); 
         String line="";
         String[] seg;
         while ((line = reader.readLine()) != null){
             seg=line.split(",");
-            var list = map.get(Long.parseLong(seg[0]));
+            var list = map.get(Integer.parseInt(seg[0]));
             if(list==null){
-                list = new ArrayList<Long>();
-                map.put(Long.parseLong(seg[0]), list);
+                list = new ArrayList<Integer>();
+                map.put(Integer.parseInt(seg[0]), list);
             }
-            list.add(Long.parseLong(seg[1]));
+            list.add(Integer.parseInt(seg[1]));
         }
         reader.close();
     }
     /*
     * 
     */
-    public ArrayList<Long> getActiveObjects(String filepath) throws IOException{
+    public ArrayList<Integer> getActiveObjects(String filepath) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filepath)); 
         String line="";
         
-        ArrayList<Long> activeIds = new ArrayList<>();
+        ArrayList<Integer> activeIds = new ArrayList<>();
         while ((line = reader.readLine()) != null){
-            activeIds.add(Long.parseLong(line));
+            activeIds.add(Integer.parseInt(line));
         }
         reader.close();
         return activeIds;

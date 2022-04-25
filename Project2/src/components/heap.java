@@ -5,11 +5,11 @@ import java.util.HashMap;
 
 public class heap {
     // id --> object
-    public HashMap<Long,object> objects;
+    public HashMap<Integer,object> objects;
     // id --> ids
-    public HashMap<Long,ArrayList<Long>> network;
+    public HashMap<Integer,ArrayList<Integer>> network;
     // needed objects 
-    public ArrayList<Long> activeIds;
+    public ArrayList<Integer> activeIds;
     public heap(){
         this.objects=new HashMap<>();
         this.network=new HashMap<>();
