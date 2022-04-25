@@ -8,15 +8,15 @@ import java.util.Map;
 
 public class InputGenerator {
     public static void generate(){
-        ArrayList<object> list = new ArrayList<>();
-        ArrayList<object> roots = new ArrayList<>();
-        HashMap<object, ArrayList<object>> adj = new HashMap<>();
+        ArrayList<Obj> list = new ArrayList<>();
+        ArrayList<Obj> roots = new ArrayList<>();
+        HashMap<Obj, ArrayList<Obj>> adj = new HashMap<>();
         int num = (int) (Math.random()*100);
         int currentAddress = 0;
         for(int i=0; i<num; i++){
             int objectSize = (int) (Math.random()*100);
             int objectId = (int) (Math.random()*1000000);
-            list.add(new object(objectId, currentAddress, currentAddress + objectSize));
+            list.add(new Obj(objectId, currentAddress, currentAddress + objectSize));
             currentAddress += objectSize;
             currentAddress += (int) (Math.random()*100 + 1);
         }
@@ -27,8 +27,8 @@ public class InputGenerator {
         }
 
         for(int i=0; i<num; i++){
-            object parent = list.get(i);
-            ArrayList<object> neighbors = new ArrayList<>();
+            Obj parent = list.get(i);
+            ArrayList<Obj> neighbors = new ArrayList<>();
             for(int j=0; j<num; j++){
                 if(Math.random()>=0.1)
                     neighbors.add(list.get(j));
@@ -41,11 +41,11 @@ public class InputGenerator {
         writePointers(adj, "pointers.csv");
     }
 
-    public static void writeObjects(ArrayList<object> objects, String fileName) {
+    public static void writeObjects(ArrayList<Obj> objects, String fileName) {
         try {
             PrintWriter writer = new PrintWriter(fileName);
             StringBuilder sb = new StringBuilder();
-            for (object obj: objects) {
+            for (Obj obj: objects) {
                 sb.append(obj.id);
                 sb.append(",");
                 sb.append(obj.start);
@@ -60,11 +60,11 @@ public class InputGenerator {
         }
     }
 
-    public static void writeRoots(ArrayList<object> objects, String fileName) {
+    public static void writeRoots(ArrayList<Obj> objects, String fileName) {
         try {
             PrintWriter writer = new PrintWriter(fileName);
             StringBuilder sb = new StringBuilder();
-            for (object obj: objects) {
+            for (Obj obj: objects) {
                 sb.append(obj.id);
                 sb.append("\n");
             }
@@ -75,14 +75,14 @@ public class InputGenerator {
         }
     }
 
-    public static void writePointers(HashMap<object, ArrayList<object>> adj, String fileName) {
+    public static void writePointers(HashMap<Obj, ArrayList<Obj>> adj, String fileName) {
         try {
             PrintWriter writer = new PrintWriter(fileName);
             StringBuilder sb = new StringBuilder();
-            for(Map.Entry<object, ArrayList<object>> entry: adj.entrySet()){
-                object parent = entry.getKey();
-                ArrayList<object> children = entry.getValue();
-                for(object child: children){
+            for(Map.Entry<Obj, ArrayList<Obj>> entry: adj.entrySet()){
+                Obj parent = entry.getKey();
+                ArrayList<Obj> children = entry.getValue();
+                for(Obj child: children){
                     sb.append(parent.id);
                     sb.append(",");
                     sb.append(child.id);

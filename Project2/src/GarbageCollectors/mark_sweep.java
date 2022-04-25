@@ -2,32 +2,32 @@ package GarbageCollectors;
 
 import java.util.HashMap;
 
-import components.heap;
+import components.Heap;
 
 public class mark_sweep implements IGC {
-    void mark(Integer id,heap Heap, HashMap<Integer,Boolean> marked){
+    void mark(Integer id, Heap heap, HashMap<Integer,Boolean> marked){
         marked.put(id, true);
-        for (Integer child : Heap.network.get(id)) {
-            mark(child,Heap,marked);
+        for (Integer child : heap.network.get(id)) {
+            mark(child, heap, marked);
         }
     }
-    public void collect(heap Heap){
+    public void collect(Heap heap){
         HashMap<Integer,Boolean> marked=new HashMap<>();
         //marking
-        for (Integer id : Heap.objects.keySet()) {
-            if(Heap.activeIds.contains(id)){
-                mark(id, Heap, marked);
+        for (Integer id : heap.objects.keySet()) {
+            if(heap.activeIds.contains(id)){
+                mark(id, heap, marked);
             }
             else{
-                Boolean a;
-                Boolean b = ((a = marked.get(id))==null)?false:a;
+                Boolean a = marked.get(id);
+                Boolean b = (a == null)? false : a;
                 marked.put(id,b);
             }
         }
         //sweeping
-        for (Integer id : Heap.objects.keySet()) {
+        for (Integer id : heap.objects.keySet()) {
             if(!marked.get(id)){
-                Heap.objects.remove(id);
+                heap.objects.remove(id);
             }
         }
     }

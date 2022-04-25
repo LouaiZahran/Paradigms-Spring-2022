@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class InputManager {
-    public void getObjects(String filepath,HashMap<Integer,object>map) throws IOException{
+    public void getObjects(String filepath,HashMap<Integer, Obj>map) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filepath)); 
         String line="";
         String[] seg;
         while ((line = reader.readLine()) != null){
             seg=line.split(",");
-            map.put(Integer.parseInt(seg[0]),new object(Integer.parseInt(seg[0]), Integer.parseInt(seg[1]),Integer.parseInt(seg[2])));
+            map.put(Integer.parseInt(seg[0]),new Obj(Integer.parseInt(seg[0]), Integer.parseInt(seg[1]),Integer.parseInt(seg[2])));
         }
         reader.close();
     }

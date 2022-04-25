@@ -1,7 +1,7 @@
 package GarbageCollectors;
 
-import components.heap;
+import components.Heap;
 
 public interface IGC {
-    void collect(heap Heap);
+    void collect(Heap Heap);
 }
