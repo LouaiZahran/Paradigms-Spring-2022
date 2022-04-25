@@ -8,7 +8,7 @@ import components.Obj;
 
 public class mark_sweep{
     public static void mark(Integer id, Heap heap, HashMap<Integer,Boolean> marked){
-        if(marked.get(id)!=null&&marked.get(id)){
+        if(marked.get(id)!=null && marked.get(id)){
             return;
         }
         marked.put(id,true);
@@ -19,7 +19,7 @@ public class mark_sweep{
         }
     }
     public static void collect(Heap heap){
-        HashMap<Integer,Boolean> marked=new HashMap<>();
+        HashMap<Integer,Boolean> marked = new HashMap<>();
         //marking
         for (Integer id : heap.objects.keySet()) {
             if(heap.activeIds.contains(id)){
@@ -28,7 +28,7 @@ public class mark_sweep{
             else{
                 Boolean a = marked.get(id);
                 Boolean b = (a == null)? false : a;
-                marked.put(id,b);
+                marked.put(id, b);
             }
         }
         for(Entry<Integer,Boolean> e :marked.entrySet()){
@@ -36,6 +36,5 @@ public class mark_sweep{
                 heap.objects.remove(e.getKey());
             }
         }
-        //sweeping
     }
 }
