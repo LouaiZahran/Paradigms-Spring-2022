@@ -11,7 +11,7 @@ public class InputGenerator {
         ArrayList<Obj> list = new ArrayList<>();
         ArrayList<Obj> roots = new ArrayList<>();
         HashMap<Obj, ArrayList<Obj>> adj = new HashMap<>();
-        int num = (int) (Math.random()*12);
+        int num = (int) (Math.random()*100);
         int currentAddress = 0;
         for(int i=0; i<num; i++){
             int objectSize = (int) (Math.random()*100);
@@ -22,16 +22,17 @@ public class InputGenerator {
         }
 
         for(int i=0; i<num; i++){
-            if(Math.random()>=0.5)
+            if(Math.random()>=0.8)
                 roots.add(list.get(i));
         }
 
         for(int i=0; i<num; i++){
             Obj parent = list.get(i);
             ArrayList<Obj> neighbors = new ArrayList<>();
-            for(int j=0; j<num; j++){
-                if(Math.random()>=0.3)
+            for(int j=0; j<num/4; j++){
+                if(Math.random()>0.95){
                     neighbors.add(list.get(j));
+                }
             }
             adj.put(parent, neighbors);
         }
