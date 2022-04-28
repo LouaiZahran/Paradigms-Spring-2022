@@ -6,6 +6,7 @@ import components.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import GarbageCollectors.mark_sweep;
@@ -16,7 +17,7 @@ public class Main {
 
         System.out.println("Heap.csv read test");
         System.out.println("ID: startAddress -> endAddress\n");
-        HashMap<Integer, Obj> map = InputManager.getObjects("heap.csv");
+        LinkedHashMap<Integer, Obj> map = InputManager.getObjects("heap.csv");
         for(Map.Entry<Integer, Obj> entry: map.entrySet()) {
             Obj object = entry.getValue();
             System.out.printf("%d: %d -> %d\n", object.id, object.start, object.end);
@@ -26,7 +27,7 @@ public class Main {
 
         System.out.println("Pointers.csv read test");
         System.out.println("ParentID -> ChildID\n");
-        HashMap<Integer, ArrayList<Integer>> adj = InputManager.getNetwork("pointers.csv");
+        LinkedHashMap<Integer, ArrayList<Integer>> adj = InputManager.getNetwork("pointers.csv");
         for(Map.Entry<Integer, ArrayList<Integer>> entry: adj.entrySet()) {
             for(Integer child: entry.getValue())
                 System.out.printf("%d -> %d\n", entry.getKey(), child);

@@ -4,11 +4,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class InputManager {
-    public static HashMap<Integer, Obj> getObjects(String filepath) throws IOException{
-        HashMap<Integer, Obj> map = new HashMap<>();
+    public static LinkedHashMap<Integer, Obj> getObjects(String filepath) throws IOException{
+        LinkedHashMap<Integer, Obj> map = new LinkedHashMap<>();
         BufferedReader reader = new BufferedReader(new FileReader(filepath)); 
         String line="";
         String[] seg;
@@ -19,8 +19,8 @@ public class InputManager {
         reader.close();
         return map;
     }
-    public static HashMap<Integer,ArrayList<Integer>> getNetwork(String filepath) throws IOException{
-        HashMap<Integer,ArrayList<Integer>> map = new HashMap<>();
+    public static LinkedHashMap<Integer,ArrayList<Integer>> getNetwork(String filepath) throws IOException{
+        LinkedHashMap<Integer,ArrayList<Integer>> map = new LinkedHashMap<>();
         BufferedReader reader = new BufferedReader(new FileReader(filepath)); 
         String line="";
         String[] seg;
