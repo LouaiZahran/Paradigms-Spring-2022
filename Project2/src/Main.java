@@ -42,7 +42,7 @@ public class Main {
             System.out.println(root);
         Heap myHeap = new Heap(map, adj, roots);
         Copy.collect(myHeap);
-        MarkCompact.markAndCompact(myHeap);
+        MarkCompact.collect(myHeap);
         OutputManager.writeHeap(Copy.getResultHeap(),"Copy res.csv");
         OutputManager.writeHeap(myHeap,"Mark and Compact res.csv");
     }
