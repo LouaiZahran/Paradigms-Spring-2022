@@ -38,6 +38,7 @@ public class Copy {
     public static void collect(Heap oldHeap){
         Heap newHeap=new Heap();
         int endPtr=0;
+
         for(Integer active : oldHeap.activeIds){
             endPtr=addRoot(oldHeap,newHeap,active,endPtr);
             endPtr=addChildren(oldHeap,newHeap,active,endPtr);
