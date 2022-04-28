@@ -44,7 +44,7 @@ public class InputManager {
         String line="";
         
         ArrayList<Integer> activeIds = new ArrayList<>();
-        while ((line = reader.readLine()) != null){
+        while ((line = reader.readLine()) != null && line.compareTo("") != 0){
             activeIds.add(Integer.parseInt(line));
         }
         reader.close();

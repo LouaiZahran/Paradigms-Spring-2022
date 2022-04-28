@@ -28,7 +28,7 @@ public class Tester {
 //------------------------------------------------------------------------------------------
     //each test should be a folder in "/tests/" & fill {tests} with their names
     //each folder must have files with names identical to {args} and {expected}
-    final String[] tests={"all_roots"};
+    final String[] tests={"all connected and have cycle","all roots","Garbage Cycle Test","garbage points to Root","no Roots"};
     final String[] args = {"/heap.csv","/pointers.csv","/roots.csv"};
     final String[] expected = {"/MS_exp.csv","/MSC_exp.csv","/COPY_exp.csv"};
 
