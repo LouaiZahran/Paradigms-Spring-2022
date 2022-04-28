@@ -1,5 +1,6 @@
 package Testing;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -45,7 +46,7 @@ public class Tester {
         this.c=new Copy();
         // this.g1=new G1();
     }
-    private Boolean[] runTest(String directory){
+    private String[] runTest(String directory){
         try {
             String[] test_args = {"/tests/"+directory+args[0],"/tests/"+directory+args[1],"/tests/"+directory+args[2],results[0]};
             MarkSweep.main(test_args);
@@ -58,13 +59,14 @@ public class Tester {
 
             // test_args[3] =  "/tests/"+directory+results[3];
             // G1.main(args);
-            Boolean[] test_res = new Boolean[results.length] ;
+
+            String[] test_res = new String[2*results.length] ;
             for (int i = 0; i < results.length; i++) {
                 String exp = Files.readString(Paths.get(new File("/tests/"+directory+expected[i]).getAbsolutePath()));            
-                test_args[3] = "/tests/"+directory+results[i];
-                MarkSweep.main(test_args);
-                String res = Files.readString(Paths.get(new File("/tests/"+directory+results[i]).getAbsolutePath()));
-                test_res[i]=exp.equals(res);
+                String res =* Files.readString(Paths.get(new File("/tests/"+directory+results[i]).getAbsolutePath()));
+                // test_res[i]=exp.equals(res);
+                test_res[i]=exp;
+                test_res[2*i]=res;
             }
             return test_res;
         } catch (IOException e) {
@@ -81,10 +83,11 @@ public class Tester {
         });;
         return generated;
     }
-    private void processTestRes(java.util.Map.Entry<String, Boolean[]> entry,ArrayList<DynamicTest> generated) {
+    private void processTestRes(java.util.Map.Entry<String, String[]> entry,ArrayList<DynamicTest> generated) {
         for(int i=0;i<entry.getValue().length;i++){
             int k=i;
-            generated.add(DynamicTest.dynamicTest(entry.getKey()+"-"+i,()->assertTrue(entry.getValue()[k])));
+            generated.add(DynamicTest.dynamicTest(entry.getKey()+"-"+i,()->assertEquals(entry.getValue()[k],entry.getValue()[2*k])));
         }
+        // ()->assertTrue(entry.getValue()[k])
     }
 }
