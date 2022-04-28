@@ -31,6 +31,13 @@ public class Heap {
     this.network=adj;
     this.activeIds=roots;
     }
+    public static Heap summonHeap(String[] args) throws IOException{
+        LinkedHashMap<Integer, Obj> map = InputManager.getObjects(args[0]);
+        LinkedHashMap<Integer, ArrayList<Integer>> adj = InputManager.getNetwork(args[1]);
+        ArrayList<Integer> roots = InputManager.getActiveObjects(args[2]);
+        Heap myHeap = new Heap(map, adj, roots);
+        return myHeap;
+    }
 
     public void print(){
         for (Integer id : objects.keySet()) {

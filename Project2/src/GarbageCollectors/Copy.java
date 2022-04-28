@@ -2,7 +2,9 @@ package GarbageCollectors;
 
 import components.Heap;
 import components.Obj;
+import components.OutputManager;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,5 +46,10 @@ public class Copy {
     }
     public static Heap getResultHeap(){
         return resultHeap;
+    }
+    public static void main(String[] args) throws IOException {
+        Heap heap = Heap.summonHeap(args);
+        collect(heap);
+        OutputManager.writeHeap(resultHeap,args[3]);
     }
 }

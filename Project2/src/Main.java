@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import GarbageCollectors.mark_sweep;
+import GarbageCollectors.MarkSweep;
 
 public class Main {
     public static void main(String[] args) throws IOException {

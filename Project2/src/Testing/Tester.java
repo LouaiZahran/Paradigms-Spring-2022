@@ -1,0 +1,83 @@
+package Testing;
+
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.security.KeyStore.Entry;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import org.junit.Test;
+import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.TestFactory;
+
+import GarbageCollectors.Copy;
+import GarbageCollectors.MarkCompact;
+import GarbageCollectors.MarkSweep;
+
+public class Tester {
+    String[] tests={"t1","t2","add folders' paths here here"};
+    MarkSweep ms;
+    MarkCompact msc;
+    Copy c;
+    //  G1 g1;
+    
+    final String[] args = {"/heap.csv","/adj.csv","/root.csv"};
+    final String[] results = {"/MS_res.csv","MSC_res.csv","COPY_res.csv","G1_res.csv"};
+    final String[] expected = {"/MS_exp.csv","MSC_exp.csv","COPY_exp.csv","G1_exp.csv"};
+    public Tester(){
+        this.ms = new MarkSweep();
+        this.msc=new MarkCompact();
+        this.c=new Copy();
+        // this.g1=new G1();
+    }
+    private Boolean[] runTest(String directory){
+        try {
+            String[] test_args = {"/tests/"+directory+args[0],"/tests/"+directory+args[1],"/tests/"+directory+args[2],results[0]};
+            MarkSweep.main(test_args);
+
+            test_args[3] =  "/tests/"+directory+results[1];
+            MarkCompact.main(args);
+
+            test_args[3] =  "/tests/"+directory+results[2];
+            Copy.main(args);
+
+            // test_args[3] =  "/tests/"+directory+results[3];
+            // G1.main(args);
+            Boolean[] test_res = new Boolean[results.length] ;
+            for (int i = 0; i < results.length; i++) {
+                String exp = Files.readString(Paths.get(new File("/tests/"+directory+expected[i]).getAbsolutePath()));            
+                test_args[3] = "/tests/"+directory+results[i];
+                MarkSweep.main(test_args);
+                String res = Files.readString(Paths.get(new File("/tests/"+directory+results[i]).getAbsolutePath()));
+                test_res[i]=exp.equals(res);
+            }
+            return test_res;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    @TestFactory
+    public Collection<DynamicTest>  generateTests(){
+        ArrayList<DynamicTest> generated = new ArrayList<>();
+        IntStream.iterate(0, n -> (n+1)).limit(tests.length).mapToObj(i -> Map.entry(tests[i],runTest(tests[i]))).forEach(
+            entry->{
+                processTestRes(entry,generated);
+        });;
+        return generated;
+    }
+    private void processTestRes(java.util.Map.Entry<String, Boolean[]> entry,ArrayList<DynamicTest> generated) {
+        for(int i=0;i<entry.getValue().length;i++){
+            int k=i;
+            generated.add(DynamicTest.dynamicTest(entry.getKey()+"-"+i,()->assertTrue(entry.getValue()[k])));
+        }
+    }
+}
