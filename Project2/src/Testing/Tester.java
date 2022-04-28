@@ -24,10 +24,10 @@ import GarbageCollectors.MarkSweep;
 
 public class Tester {
 //------------------------------------------------------------------------------------------
-    //each test should be a folder in "/tests/" to fill {tests} with their names
+    //each test should be a folder in "/tests/" & fill {tests} with their names
     //each folder must have files with names identical to {args} and {expected}
-    //don't bother with {results}
-    String[] tests={"t1","t2","..."};
+ 
+    final String[] tests={"t1","t2","..."};
     final String[] args = {"/heap.csv","/adj.csv","/root.csv"};
     final String[] expected = {"/MS_exp.csv","MSC_exp.csv","COPY_exp.csv","G1_exp.csv"};
 //------------------------------------------------------------------------------------------
