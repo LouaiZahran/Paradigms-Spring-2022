@@ -63,7 +63,7 @@ public class Tester {
             String[] test_res = new String[2*results.length] ;
             for (int i = 0; i < results.length; i++) {
                 String exp = Files.readString(Paths.get(new File("/tests/"+directory+expected[i]).getAbsolutePath()));            
-                String res =* Files.readString(Paths.get(new File("/tests/"+directory+results[i]).getAbsolutePath()));
+                String res = Files.readString(Paths.get(new File("/tests/"+directory+results[i]).getAbsolutePath()));
                 // test_res[i]=exp.equals(res);
                 test_res[i]=exp;
                 test_res[2*i]=res;
