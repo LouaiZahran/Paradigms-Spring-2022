@@ -29,8 +29,8 @@ public class Copy {
             int end=oldHeap.objects.get(child).getEnd();
             int size=end-start;
             newHeap.objects.put(child,new Obj(child,endPtr,endPtr+size));
-            endPtr=addChildren(oldHeap,newHeap,child,endPtr);
             endPtr=endPtr+size+1;
+            endPtr=addChildren(oldHeap,newHeap,child,endPtr);
         }
         return endPtr;
     }
