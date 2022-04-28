@@ -30,10 +30,10 @@ public class Tester {
  
     final String[] tests={"t1","t2","..."};
     final String[] args = {"/heap.csv","/adj.csv","/root.csv"};
-    final String[] expected = {"/MS_exp.csv","MSC_exp.csv","COPY_exp.csv","G1_exp.csv"};
+    final String[] expected = {"/MS_exp.csv","/MSC_exp.csv","/COPY_exp.csv","/G1_exp.csv"};
 //------------------------------------------------------------------------------------------
     
-    final String[] results = {"/MS_res.csv","MSC_res.csv","COPY_res.csv","G1_res.csv"};
+    final String[] results = {"/MS_res.csv","/MSC_res.csv","/COPY_res.csv","/G1_res.csv"};
     MarkSweep ms;
     MarkCompact msc;
     Copy c;
