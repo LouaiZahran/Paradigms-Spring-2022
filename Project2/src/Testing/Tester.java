@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.KeyStore.Entry;
 import java.util.ArrayList;
@@ -27,13 +28,14 @@ public class Tester {
 //------------------------------------------------------------------------------------------
     //each test should be a folder in "/tests/" & fill {tests} with their names
     //each folder must have files with names identical to {args} and {expected}
- 
-    final String[] tests={"t1","t2","..."};
-    final String[] args = {"/heap.csv","/adj.csv","/root.csv"};
-    final String[] expected = {"/MS_exp.csv","/MSC_exp.csv","/COPY_exp.csv","/G1_exp.csv"};
+    final String[] tests={"all_roots"};
+    final String[] args = {"/heap.csv","/pointers.csv","/roots.csv"};
+    final String[] expected = {"/MS_exp.csv","/MSC_exp.csv","/COPY_exp.csv"};
+
+    final String cwd = (Path.of("").toAbsolutePath()).toString()+"/bin";
 //------------------------------------------------------------------------------------------
     
-    final String[] results = {"/MS_res.csv","/MSC_res.csv","/COPY_res.csv","/G1_res.csv"};
+    final String[] results = {"/MS_res.csv","/MSC_res.csv","/COPY_res.csv"};
     MarkSweep ms;
     MarkCompact msc;
     Copy c;
@@ -48,22 +50,22 @@ public class Tester {
     }
     private String[] runTest(String directory){
         try {
-            String[] test_args = {"/tests/"+directory+args[0],"/tests/"+directory+args[1],"/tests/"+directory+args[2],results[0]};
+            String[] test_args = {cwd+"/tests/"+directory+args[0],cwd+"/tests/"+directory+args[1],cwd+"/tests/"+directory+args[2],cwd+"/tests/"+directory+results[0]};
             MarkSweep.main(test_args);
 
-            test_args[3] =  "/tests/"+directory+results[1];
-            MarkCompact.main(args);
+            test_args[3] =  cwd+"/tests/"+directory+results[1];
+            MarkCompact.main(test_args);
 
-            test_args[3] =  "/tests/"+directory+results[2];
-            Copy.main(args);
+            test_args[3] =  cwd+"/tests/"+directory+results[2];
+            Copy.main(test_args);
 
-            // test_args[3] =  "/tests/"+directory+results[3];
+            // test_args[3] =  cwd+"/tests/"+directory+results[3];
             // G1.main(args);
 
             String[] test_res = new String[2*results.length] ;
             for (int i = 0; i < results.length; i++) {
-                String exp = Files.readString(Paths.get(new File("/tests/"+directory+expected[i]).getAbsolutePath()));            
-                String res = Files.readString(Paths.get(new File("/tests/"+directory+results[i]).getAbsolutePath()));
+                String exp = Files.readString(Paths.get(new File(cwd+"/tests/"+directory+expected[i]).getAbsolutePath()));            
+                String res = Files.readString(Paths.get(new File(cwd+"/tests/"+directory+results[i]).getAbsolutePath()));
                 // test_res[i]=exp.equals(res);
                 test_res[i]=exp;
                 test_res[2*i]=res;
@@ -76,6 +78,8 @@ public class Tester {
     }
     @TestFactory
     public Collection<DynamicTest>  generateTests(){
+        System.out.println((Path.of("").toAbsolutePath()).toString());
+
         ArrayList<DynamicTest> generated = new ArrayList<>();
         IntStream.iterate(0, n -> (n+1)).limit(tests.length).mapToObj(i -> Map.entry(tests[i],runTest(tests[i]))).forEach(
             entry->{

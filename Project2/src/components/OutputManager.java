@@ -1,13 +1,16 @@
 package components;
 
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
 public class OutputManager {
-    public static void writeHeap(Heap heap, String fileName){
+    public static void writeHeap(Heap heap, String fileName) throws IOException{
         try{
-            PrintWriter writer = new PrintWriter(fileName);
+            BufferedWriter Bwriter = new BufferedWriter(new FileWriter(fileName)); 
             StringBuilder sb = new StringBuilder();
             for(Map.Entry<Integer, Obj> entry: heap.objects.entrySet()){
                 Obj obj = entry.getValue();
@@ -18,8 +21,8 @@ public class OutputManager {
                 sb.append(obj.end);
                 sb.append("\n");
             }
-            writer.write(sb.toString());
-            writer.close();
+            Bwriter.write(sb.toString());
+            Bwriter.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
