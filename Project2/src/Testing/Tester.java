@@ -34,7 +34,7 @@ public class Tester {
 
     final String cwd = (Path.of("").toAbsolutePath()).toString()+"/bin";
 //------------------------------------------------------------------------------------------
-    
+    final String[] gcs = {"mark_sweep","mark_compact","copy","g1"};
     final String[] results = {"/MS_res.csv","/MSC_res.csv","/COPY_res.csv"};
     MarkSweep ms;
     MarkCompact msc;
@@ -88,9 +88,9 @@ public class Tester {
         return generated;
     }
     private void processTestRes(java.util.Map.Entry<String, String[]> entry,ArrayList<DynamicTest> generated) {
-        for(int i=0;i<entry.getValue().length;i++){
+        for(int i=0;i<entry.getValue().length/2;i++){
             int k=i;
-            generated.add(DynamicTest.dynamicTest(entry.getKey()+"-"+i,()->assertEquals(entry.getValue()[k],entry.getValue()[2*k])));
+            generated.add(DynamicTest.dynamicTest(entry.getKey()+"_"+gcs[k],()->assertEquals(entry.getValue()[k],entry.getValue()[2*k])));
         }
         // ()->assertTrue(entry.getValue()[k])
     }
