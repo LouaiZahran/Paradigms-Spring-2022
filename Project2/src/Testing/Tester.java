@@ -23,15 +23,22 @@ import GarbageCollectors.MarkCompact;
 import GarbageCollectors.MarkSweep;
 
 public class Tester {
-    String[] tests={"t1","t2","add folders' paths here here"};
+//------------------------------------------------------------------------------------------
+    //each test should be a folder in "/tests/" to fill {tests} with their names
+    //each folder must have files with names identical to {args} and {expected}
+    //don't bother with {results}
+    String[] tests={"t1","t2","..."};
+    final String[] args = {"/heap.csv","/adj.csv","/root.csv"};
+    final String[] expected = {"/MS_exp.csv","MSC_exp.csv","COPY_exp.csv","G1_exp.csv"};
+//------------------------------------------------------------------------------------------
+    
+    final String[] results = {"/MS_res.csv","MSC_res.csv","COPY_res.csv","G1_res.csv"};
     MarkSweep ms;
     MarkCompact msc;
     Copy c;
     //  G1 g1;
     
-    final String[] args = {"/heap.csv","/adj.csv","/root.csv"};
-    final String[] results = {"/MS_res.csv","MSC_res.csv","COPY_res.csv","G1_res.csv"};
-    final String[] expected = {"/MS_exp.csv","MSC_exp.csv","COPY_exp.csv","G1_exp.csv"};
+
     public Tester(){
         this.ms = new MarkSweep();
         this.msc=new MarkCompact();
