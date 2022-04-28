@@ -64,11 +64,9 @@ public class Tester {
 
             String[] test_res = new String[2*results.length] ;
             for (int i = 0; i < results.length; i++) {
-                String exp = Files.readString(Paths.get(new File(cwd+"/tests/"+directory+expected[i]).getAbsolutePath()));            
-                String res = Files.readString(Paths.get(new File(cwd+"/tests/"+directory+results[i]).getAbsolutePath()));
+                test_res[i] = Files.readString(Paths.get(new File(cwd+"/tests/"+directory+expected[i]).getAbsolutePath()));            
+                test_res[results.length+i] = Files.readString(Paths.get(new File(cwd+"/tests/"+directory+results[i]).getAbsolutePath()));
                 // test_res[i]=exp.equals(res);
-                test_res[i]=exp;
-                test_res[2*i]=res;
             }
             return test_res;
         } catch (IOException e) {
@@ -90,7 +88,7 @@ public class Tester {
     private void processTestRes(java.util.Map.Entry<String, String[]> entry,ArrayList<DynamicTest> generated) {
         for(int i=0;i<entry.getValue().length/2;i++){
             int k=i;
-            generated.add(DynamicTest.dynamicTest(entry.getKey()+"_"+gcs[k],()->assertEquals(entry.getValue()[k],entry.getValue()[2*k])));
+            generated.add(DynamicTest.dynamicTest(entry.getKey()+"_"+gcs[k],()->assertEquals(entry.getValue()[k],entry.getValue()[results.length+k])));
         }
         // ()->assertTrue(entry.getValue()[k])
     }
