@@ -21,6 +21,10 @@ public class Obj {
         this.end = end;
     }
 
+    public int getSize(){
+        return end - start;
+    }
+
     public Obj(int id, int start, int end) {
         this.id = id;
         this.start = start;
