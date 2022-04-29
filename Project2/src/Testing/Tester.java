@@ -35,7 +35,7 @@ public class Tester {
     final String cwd = (Path.of("").toAbsolutePath()).toString();
 //------------------------------------------------------------------------------------------
     final String[] gcs = {"mark_sweep","mark_compact","copy","g1"};
-    final String[] results = {"/MS_res.csv","/MSC_res.csv","/COPY_res.csv"};
+    final String[] results = {"/MS_res.csv","/MSC_res.csv","/COPY_res.csv","G1_res.csv"};
     MarkSweep ms;
     MarkCompact msc;
     Copy c;
