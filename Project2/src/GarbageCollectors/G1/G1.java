@@ -1,4 +1,4 @@
-package GarbageCollectors;
+package GarbageCollectors.G1;
 
 import components.*;
 
@@ -6,10 +6,27 @@ import java.io.IOException;
 import java.util.*;
 
 public class G1 {
-    public static void main (String[] args) throws IOException {
-        G1Heap heap = G1Heap.createHeap(args);
+    public static void main (String[] args) {
+        if(args.length != 5){
+            System.out.println("Please enter the required (5) arguments");
+            return;
+        }
+
+        G1Heap heap;
+        try {
+            heap = G1Heap.createHeap(args);
+        } catch (Exception e){
+            System.out.println("The input is not valid");
+            return;
+        }
+
         collect(heap);
-        OutputManager.writeHeap(heap, args[3]);
+
+        try {
+            OutputManager.writeHeap(heap, args[3]);
+        } catch (Exception e){
+            System.out.println("The output file cannot be written to disk");
+        }
     }
 
     public static void collect(G1Heap heap){

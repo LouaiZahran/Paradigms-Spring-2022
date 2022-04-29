@@ -1,7 +1,8 @@
-package GarbageCollectors;
+package GarbageCollectors.MarkCompact;
 
 import java.io.IOException;
 
+import GarbageCollectors.MarkSweep.MarkSweep;
 import components.Heap;
 import components.OutputManager;
 
@@ -21,8 +22,25 @@ public class MarkCompact {
         }
     }
     public static void main (String[] args) throws IOException{
-        Heap heap = Heap.summonHeap(args);
+        if(args.length != 4){
+            System.out.println("Please enter the required (4) arguments");
+            return;
+        }
+
+        Heap heap;
+        try {
+            heap = Heap.summonHeap(args);
+        } catch (Exception e){
+            System.out.println("The input files are not valid");
+            return;
+        }
+
         collect(heap);
-        OutputManager.writeHeap(heap,args[3]);
+
+        try {
+            OutputManager.writeHeap(heap, args[3]);
+        } catch (Exception e){
+            System.out.println("The output file cannot be written to disk");
+        }
     }
 }

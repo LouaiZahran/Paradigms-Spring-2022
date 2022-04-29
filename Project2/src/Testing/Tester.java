@@ -8,19 +8,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.KeyStore.Entry;
 import java.util.*;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
-import org.junit.Test;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 
-import GarbageCollectors.Copy;
-import GarbageCollectors.G1;
-import GarbageCollectors.MarkCompact;
-import GarbageCollectors.MarkSweep;
+import GarbageCollectors.Copy.Copy;
+import GarbageCollectors.G1.G1;
+import GarbageCollectors.MarkCompact.MarkCompact;
+import GarbageCollectors.MarkSweep.MarkSweep;
 
 public class Tester {
 //------------------------------------------------------------------------------------------

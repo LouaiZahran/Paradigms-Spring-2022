@@ -1,4 +1,4 @@
-package GarbageCollectors;
+package GarbageCollectors.Copy;
 
 import components.Heap;
 import components.Obj;
@@ -40,9 +40,26 @@ public class Copy {
     public static Heap getResultHeap(){
         return resultHeap;
     }
-    public static void main(String[] args) throws IOException {
-        Heap heap = Heap.summonHeap(args);
+    public static void main(String[] args){
+        if(args.length != 4){
+            System.out.println("Please enter the required (4) arguments");
+            return;
+        }
+
+        Heap heap;
+        try {
+            heap = Heap.summonHeap(args);
+        } catch (Exception e){
+            System.out.println("The input files are not valid");
+            return;
+        }
+        
         collect(heap);
-        OutputManager.writeHeap(resultHeap,args[3]);
+
+        try {
+            OutputManager.writeHeap(resultHeap, args[3]);
+        } catch (Exception e){
+            System.out.println("The output file cannot be written to disk");
+        }
     }
 }
