@@ -32,7 +32,7 @@ public class Tester {
     final String[] args = {"/heap.csv","/pointers.csv","/roots.csv"};
     final String[] expected = {"/MS_exp.csv","/MSC_exp.csv","/COPY_exp.csv","G1_exp.csv"};
 
-    final String cwd = (Path.of("").toAbsolutePath()).toString();
+    final String cwd = (Path.of("").toAbsolutePath()).toString()+"/bin";
 //------------------------------------------------------------------------------------------
     final String[] gcs = {"mark_sweep","mark_compact","copy","g1"};
     final String[] results = {"/MS_res.csv","/MSC_res.csv","/COPY_res.csv","G1_res.csv"};
@@ -60,7 +60,7 @@ public class Tester {
             Copy.main(test_args);
 
             test_args[3] =  cwd+"/tests/"+directory+results[3];
-            G1.main(args);
+            G1.main(test_args);
 
             String[] test_res = new String[2*results.length] ;
             for (int i = 0; i < results.length; i++) {
