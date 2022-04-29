@@ -1,5 +1,6 @@
 
 import GarbageCollectors.Copy;
+import GarbageCollectors.G1;
 import GarbageCollectors.MarkCompact;
 import components.*;
 
@@ -43,6 +44,9 @@ public class Main {
         Heap myHeap = new Heap(map, adj, roots);
         Copy.collect(myHeap);
         MarkCompact.collect(myHeap);
+        G1Heap g1Heap = G1Heap.createHeap(args);
+        G1.collect(g1Heap);
+        OutputManager.writeHeap(g1Heap, "G1 res.csv");
         OutputManager.writeHeap(Copy.getResultHeap(),"Copy res.csv");
         OutputManager.writeHeap(myHeap,"Mark and Compact res.csv");
     }

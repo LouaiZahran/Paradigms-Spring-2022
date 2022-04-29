@@ -1,8 +1,11 @@
 package components;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Map;
 
 public class G1Heap extends Heap{
     int size;
@@ -26,13 +29,14 @@ public class G1Heap extends Heap{
             myHeap.blocks[i].start = i * myHeap.blockSize;
             myHeap.blocks[i].freeArea = myHeap.blockSize;
             myHeap.blocks[i].content = new HashSet<>();
+            myHeap.blocks[i].appendable = true;
         }
         for(Obj obj: myHeap.objects.values()){
             int regionNumber = obj.getStart()/myHeap.blockSize;
             assert(obj.getEnd() < regionNumber * myHeap.blockSize); //Otherwise, this object spawns multiple blocks
             myHeap.blocks[regionNumber].insert(obj);
+            myHeap.blocks[regionNumber].appendable = false;
         }
         return myHeap;
     }
-
 }

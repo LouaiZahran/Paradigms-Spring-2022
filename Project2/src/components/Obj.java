@@ -22,7 +22,7 @@ public class Obj {
     }
 
     public int getSize(){
-        return end - start;
+        return end - start + 1;
     }
 
     public Obj(int id, int start, int end) {

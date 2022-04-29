@@ -27,4 +27,25 @@ public class OutputManager {
             e.printStackTrace();
         }
     }
+
+    public static void writeHeap(G1Heap heap, String fileName) throws IOException{
+        try{
+            BufferedWriter Bwriter = new BufferedWriter(new FileWriter(fileName));
+            StringBuilder sb = new StringBuilder();
+            for(Region block: heap.blocks) {
+                for (Obj obj : block.content) {
+                    sb.append(obj.id);
+                    sb.append(",");
+                    sb.append(obj.start);
+                    sb.append(",");
+                    sb.append(obj.end);
+                    sb.append("\n");
+                }
+            }
+            Bwriter.write(sb.toString());
+            Bwriter.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }
