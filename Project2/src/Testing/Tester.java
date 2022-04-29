@@ -48,19 +48,21 @@ public class Tester {
     private String[] runTest(String directory){
         try {
             System.out.println("..");
-            String[] test_args = {cwd+"/tests/"+directory+args[0],cwd+"/tests/"+directory+args[1],cwd+"/tests/"+directory+args[2],cwd+"/tests/"+directory+results[0],"512"};
-            MarkSweep.main(test_args);
+            String[] test_args_all = {cwd+"/tests/"+directory+args[0],cwd+"/tests/"+directory+args[1],cwd+"/tests/"+directory+args[2],cwd+"/tests/"+directory+results[0]};
+            String[] test_args_G1 = {cwd+"/tests/"+directory+args[0],cwd+"/tests/"+directory+args[1],cwd+"/tests/"+directory+args[2],cwd+"/tests/"+directory+results[0], "512"};
+
+            MarkSweep.main(test_args_all);
 
 
-            test_args[3] =  cwd+"/tests/"+directory+results[1];
-            MarkCompact.main(test_args);
+            test_args_all[3] =  cwd+"/tests/"+directory+results[1];
+            MarkCompact.main(test_args_all);
 
-            test_args[3] =  cwd+"/tests/"+directory+results[2];
-            Copy.main(test_args);
+            test_args_all[3] =  cwd+"/tests/"+directory+results[2];
+            Copy.main(test_args_all);
             System.out.println("..");
 
-            test_args[3] =  cwd+"/tests/"+directory+results[3];
-            G1.main(test_args);
+            test_args_G1[3] =  cwd+"/tests/"+directory+results[3];
+            G1.main(test_args_G1);
             System.out.println("..");
 
 
