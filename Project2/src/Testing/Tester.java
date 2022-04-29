@@ -18,6 +18,7 @@ import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 
 import GarbageCollectors.Copy;
+import GarbageCollectors.G1;
 import GarbageCollectors.MarkCompact;
 import GarbageCollectors.MarkSweep;
 
@@ -38,18 +39,18 @@ public class Tester {
     MarkSweep ms;
     MarkCompact msc;
     Copy c;
-    //  G1 g1;
+    G1 g1;
     
 
     public Tester(){
         this.ms = new MarkSweep();
         this.msc=new MarkCompact();
         this.c=new Copy();
-        // this.g1=new G1();
+        this.g1=new G1();
     }
     private String[] runTest(String directory){
         try {
-            String[] test_args = {cwd+"/tests/"+directory+args[0],cwd+"/tests/"+directory+args[1],cwd+"/tests/"+directory+args[2],cwd+"/tests/"+directory+results[0]};
+            String[] test_args = {cwd+"/tests/"+directory+args[0],cwd+"/tests/"+directory+args[1],cwd+"/tests/"+directory+args[2],cwd+"/tests/"+directory+results[0],"512"};
             MarkSweep.main(test_args);
 
             test_args[3] =  cwd+"/tests/"+directory+results[1];
@@ -58,14 +59,13 @@ public class Tester {
             test_args[3] =  cwd+"/tests/"+directory+results[2];
             Copy.main(test_args);
 
-            // test_args[3] =  cwd+"/tests/"+directory+results[3];
-            // G1.main(args);
+            test_args[3] =  cwd+"/tests/"+directory+results[3];
+            G1.main(args);
 
             String[] test_res = new String[2*results.length] ;
             for (int i = 0; i < results.length; i++) {
                 test_res[i] = Files.readString(Paths.get(new File(cwd+"/tests/"+directory+expected[i]).getAbsolutePath()));            
                 test_res[results.length+i] = Files.readString(Paths.get(new File(cwd+"/tests/"+directory+results[i]).getAbsolutePath()));
-                // test_res[i]=exp.equals(res);
             }
             return test_res;
         } catch (IOException e) {
@@ -89,6 +89,5 @@ public class Tester {
             int k=i;
             generated.add(DynamicTest.dynamicTest(entry.getKey()+"_"+gcs[k],()->assertEquals(entry.getValue()[k],entry.getValue()[results.length+k])));
         }
-        // ()->assertTrue(entry.getValue()[k])
     }
 }
