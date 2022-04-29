@@ -33,7 +33,7 @@ public class G1Heap extends Heap{
         }
         for(Obj obj: myHeap.objects.values()){
             int regionNumber = obj.getStart()/myHeap.blockSize;
-            assert(obj.getEnd() < regionNumber * myHeap.blockSize); //Otherwise, this object spawns multiple blocks
+            assert(obj.getEnd() < (regionNumber+1) * myHeap.blockSize); //Otherwise, this object spawns multiple blocks
             myHeap.blocks[regionNumber].insert(obj);
             myHeap.blocks[regionNumber].appendable = false;
         }
