@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Map;
 
 public class G1Heap extends Heap{
@@ -28,7 +29,7 @@ public class G1Heap extends Heap{
         for(int i=0; i<16; i++){
             myHeap.blocks[i].start = i * myHeap.blockSize;
             myHeap.blocks[i].freeArea = myHeap.blockSize;
-            myHeap.blocks[i].content = new HashSet<>();
+            myHeap.blocks[i].content = new LinkedHashSet<>();
             myHeap.blocks[i].appendable = true;
         }
         for(Obj obj: myHeap.objects.values()){

@@ -1,12 +1,11 @@
 package components;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 public class Region {
     public int start;
     public int freeArea;
-    public HashSet<Obj> content;
+    public LinkedHashSet<Obj> content;
     public boolean appendable;
 
     public void insert(Obj obj){
