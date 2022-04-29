@@ -50,17 +50,22 @@ public class Tester {
     }
     private String[] runTest(String directory){
         try {
+            System.out.println("..");
             String[] test_args = {cwd+"/tests/"+directory+args[0],cwd+"/tests/"+directory+args[1],cwd+"/tests/"+directory+args[2],cwd+"/tests/"+directory+results[0],"512"};
             MarkSweep.main(test_args);
+
 
             test_args[3] =  cwd+"/tests/"+directory+results[1];
             MarkCompact.main(test_args);
 
             test_args[3] =  cwd+"/tests/"+directory+results[2];
             Copy.main(test_args);
+            System.out.println("..");
 
             test_args[3] =  cwd+"/tests/"+directory+results[3];
             G1.main(test_args);
+            System.out.println("..");
+
 
             String[] test_res = new String[2*results.length] ;
             for (int i = 0; i < results.length; i++) {
@@ -80,6 +85,8 @@ public class Tester {
         ArrayList<DynamicTest> generated = new ArrayList<>();
         IntStream.iterate(0, n -> (n+1)).limit(tests.length).mapToObj(i -> Map.entry(tests[i],runTest(tests[i]))).forEach(
             entry->{
+                System.out.println(entry.getKey());
+
                 processTestRes(entry,generated);
         });;
         return generated;
