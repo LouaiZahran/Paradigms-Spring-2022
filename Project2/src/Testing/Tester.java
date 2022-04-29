@@ -30,7 +30,7 @@ public class Tester {
                             "no Roots","one pointer or more from an object","one poitner or more from an object in garbage"
                             ,"2 roots one object","Normal heap","self pointer"};
     final String[] args = {"/heap.csv","/pointers.csv","/roots.csv"};
-    final String[] expected = {"/MS_exp.csv","/MSC_exp.csv","/COPY_exp.csv"};
+    final String[] expected = {"/MS_exp.csv","/MSC_exp.csv","/COPY_exp.csv","G1_exp.csv"};
 
     final String cwd = (Path.of("").toAbsolutePath()).toString();
 //------------------------------------------------------------------------------------------
