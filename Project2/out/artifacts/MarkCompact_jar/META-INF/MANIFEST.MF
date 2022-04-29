@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Created-By: 11.0.2 (Oracle Corporation 11.0.2+9)
+Built-By: @API Guardian Team
+Build-Date: 2019-06-06
+Build-Time: 21:07:38.516+0200
+Build-Revision: e7f98b22d3b2a54033711e2666a047d1066b0b25
+Specification-Title: apiguardian-api
+Specification-Version: 1.1.0
+Specification-Vendor: apiguardian.org
+Implementation-Title: apiguardian-api
+Implementation-Version: 1.1.0
+Implementation-Vendor: apiguardian.org
+

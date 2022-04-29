@@ -1,7 +1,7 @@
 
-import GarbageCollectors.Copy.Copy;
-import GarbageCollectors.G1.G1;
-import GarbageCollectors.MarkCompact.MarkCompact;
+import GarbageCollectors.Copy;
+import GarbageCollectors.G1;
+import GarbageCollectors.MarkCompact;
 import components.*;
 
 import java.io.IOException;

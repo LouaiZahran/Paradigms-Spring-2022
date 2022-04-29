@@ -14,10 +14,10 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 
-import GarbageCollectors.Copy.Copy;
-import GarbageCollectors.G1.G1;
-import GarbageCollectors.MarkCompact.MarkCompact;
-import GarbageCollectors.MarkSweep.MarkSweep;
+import GarbageCollectors.Copy;
+import GarbageCollectors.G1;
+import GarbageCollectors.MarkCompact;
+import GarbageCollectors.MarkSweep;
 
 public class Tester {
 //------------------------------------------------------------------------------------------

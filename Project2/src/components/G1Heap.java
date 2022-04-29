@@ -19,13 +19,25 @@ public class G1Heap extends Heap{
     }
 
     public static G1Heap createHeap(String[] args) throws IOException {
+        //Taking input
         G1Heap myHeap = new G1Heap();
         myHeap.objects = InputManager.getObjects(args[0]);
         myHeap.network = InputManager.getNetwork(args[1]);
         myHeap.activeIds = InputManager.getActiveObjects(args[2]);
         myHeap.size = Integer.parseInt(args[4]);
         myHeap.blockSize = myHeap.size/16;
-        assert(myHeap.size%16 == 0);
+
+        //Validation
+        if(myHeap.size%16 != 0)
+            throw new IOException();
+        for(Integer parent: myHeap.network.keySet())
+            if(!myHeap.objects.containsKey(parent))
+                throw new IOException();
+        for(Integer root: myHeap.activeIds)
+            if(!myHeap.objects.containsKey(root))
+                throw new IOException();
+
+        //Initialization
         for(int i=0; i<16; i++){
             myHeap.blocks[i].start = i * myHeap.blockSize;
             myHeap.blocks[i].freeArea = myHeap.blockSize;

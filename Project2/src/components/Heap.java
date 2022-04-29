@@ -35,6 +35,15 @@ public class Heap {
         LinkedHashMap<Integer, Obj> map = InputManager.getObjects(args[0]);
         LinkedHashMap<Integer, ArrayList<Integer>> adj = InputManager.getNetwork(args[1]);
         ArrayList<Integer> roots = InputManager.getActiveObjects(args[2]);
+
+        //Validation
+        for(Integer parent: adj.keySet())
+            if(!map.containsKey(parent))
+                throw new IOException();
+        for(Integer root: roots)
+            if(!map.containsKey(root))
+                throw new IOException();
+
         Heap myHeap = new Heap(map, adj, roots);
         return myHeap;
     }
